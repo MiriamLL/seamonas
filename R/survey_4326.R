@@ -2,7 +2,7 @@
 #' 2000 observations from nine variables.
 #' @docType data
 #' @usage data(survey_4326)
-#' @format Data frame with random generated observations and nine variables
+#' @format Data frame with 3 variables
 #' @keywords datasets
 #' @references Lerma et al. 2023
 #' @examples

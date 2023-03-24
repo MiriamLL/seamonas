@@ -6,7 +6,7 @@
 \title{Random generated data
 2000 observations from nine variables.}
 \format{
-Data frame with random generated observations and nine variables
+Data frame with 3 variables
 }
 \usage{
 data(survey_4326)
