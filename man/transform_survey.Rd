@@ -2,7 +2,7 @@
 % Please edit documentation in R/transform_survey.R
 \name{transform_survey}
 \alias{transform_survey}
-\title{A function to transform the CRS from the dataframe and coverts it to sf object}
+\title{A function to transfor the CRS from your data frame}
 \usage{
 transform_survey(
   survey_data = survey_data,
@@ -13,21 +13,21 @@ transform_survey(
 )
 }
 \arguments{
-\item{survey_data}{your data to transform}
+\item{survey_data}{A data frame with longitude and latitude in degrees}
 
-\item{column_longitude}{the name of the column where the longitude data is}
+\item{column_longitude}{The name of the column where the longitude data is}
 
-\item{column_latitude}{the name of the column where the latitude data is}
+\item{column_latitude}{The name of the column where the latitude data is}
 
-\item{from_CRS}{the CRS of the data collection for example degrees is in 4236}
+\item{from_CRS}{The CRS when the data was collected, if is degrees probably 4326}
 
-\item{to_CRS}{the CRS of the final data neede for example 3035}
+\item{to_CRS}{The CRS that you want your data to be presented, for example 3035}
 }
 \value{
-a sf object with an assigned CRS
+returns a sf object with CRS
 }
 \description{
-A function to transform the CRS from the dataframe and coverts it to sf object
+A function to transfor the CRS from your data frame
 }
 \examples{
 survey_3035<-transform_survey(survey_data=survey_4326,

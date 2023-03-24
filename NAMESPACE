@@ -2,5 +2,6 @@
 
 export("%>%")
 export(load_basemap)
+export(subset_grid)
 export(transform_survey)
 importFrom(magrittr,"%>%")
