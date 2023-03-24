@@ -25,8 +25,6 @@ load_basemap<-function(my_CRS=my_CRS, color_land=color_land, color_water=color_w
           panel.grid.major = ggplot2::element_blank(),
           panel.grid.minor = ggplot2::element_blank(),
           panel.background = ggplot2::element_rect(fill = color_water))+
-
-    ggplot2::coord_sf(xlim = c(3, 10),ylim = c(53, 56))+
     ggplot2::scale_x_continuous(labels = function(x) paste0(x, '\u00B0', "W")) +
     ggplot2::scale_y_continuous(labels = function(x) paste0(x, '\u00B0', "N"))
   return(BaseMap)}
