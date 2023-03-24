@@ -14,4 +14,8 @@ BugReports: https://github.com/MiriamLL/seamonas/issues
 Imports: 
     GermanNorthSea,
     ggplot2,
+    magrittr,
     sf
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
