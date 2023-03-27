@@ -2,6 +2,7 @@
 
 export("%>%")
 export(load_basemap)
+export(plot_density)
 export(subset_density)
 export(subset_grid)
 export(transform_survey)

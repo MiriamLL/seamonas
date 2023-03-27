@@ -29,7 +29,7 @@ subset_density<-function(density_survey=density_survey,
   grid_subset_df <- grid_subset %>%
     sf::st_drop_geometry() %>%
     dplyr::group_by(grid_identifier)%>%
-    dplyr::mutate(density_mean=mean(density))
+    dplyr::mutate(density_mean=mean(column_density))
 
   #add densities to each grid polygon
   grid_all <- merge(survey_grid,grid_subset_df, by='grid_identifier', all=TRUE)
@@ -37,7 +37,7 @@ subset_density<-function(density_survey=density_survey,
   # mean values per grid
   grid_group<-grid_all %>%
     dplyr::group_by(grid_identifier)%>%
-    dplyr::summarise_at(dplyr::vars(density),
+    dplyr::summarise_at(dplyr::vars(column_density),
                         list(mean_density = mean))
 
   # remove those grids with no data
