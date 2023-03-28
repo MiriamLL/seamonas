@@ -27,6 +27,6 @@ a sf object with the surveyed grid and in each grid the average densities
 A function to add density values to the grid, and keep only the grid will values.
 }
 \examples{
-grid_density<-subset_density(density_survey=densities_3035,column_density='densities',
+subset_density(density_survey=densities_3035,column_density='densities',
 survey_grid=grid_surveyed,grid_identifier='grid_id')
 }

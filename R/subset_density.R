@@ -8,7 +8,7 @@
 #' @return a sf object with the surveyed grid and in each grid the average densities
 #' @export
 #'
-#' @examples grid_density<-subset_density(density_survey=densities_3035,column_density='densities',
+#' @examples subset_density(density_survey=densities_3035,column_density='densities',
 #' survey_grid=grid_surveyed,grid_identifier='grid_id')
 subset_density<-function(density_survey=density_survey,
                          column_density=column_density,
@@ -29,7 +29,7 @@ subset_density<-function(density_survey=density_survey,
   grid_subset_df <- grid_subset %>%
     sf::st_drop_geometry() %>%
     dplyr::group_by(grid_identifier)%>%
-    dplyr::mutate(density_mean=mean(density_var))
+    dplyr::mutate(mean_density=mean(density_var))
 
   #add densities to each grid polygon
   grid_all <- merge(survey_grid,grid_subset_df, by='grid_identifier', all=TRUE)
