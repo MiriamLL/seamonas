@@ -23,14 +23,14 @@ plot_density<-function(density_grid=density_grid,
   density_grid$column_density<-density_grid[[column_density]]
 
   # load shapefiles
-  Europa<-sf::st_transform(GermanNorthSea::German_land, my_CRS)
-  EEZ<-sf::st_transform(GermanNorthSea::German_EEZ, my_CRS)
+  #Europa<-sf::st_transform(GermanNorthSea::German_land, my_CRS)
+  #EEZ<-sf::st_transform(GermanNorthSea::German_EEZ, my_CRS)
 
   # plot
   density_plot<-ggplot2::ggplot()+
     # maps
-    ggplot2::geom_sf(data = EEZ, colour = 'black', fill = color_water)+
-    ggplot2::geom_sf(data = Europa, colour = 'black', fill = color_land)+
+    #ggplot2::geom_sf(data = EEZ, colour = 'black', fill = color_water)+
+    #ggplot2::geom_sf(data = Europa, colour = 'black', fill = color_land)+
     ggplot2::geom_sf(data = density_grid,mapping = ggplot2::aes(fill = column_density), lwd = 0, colour = NA) +
     ggplot2::coord_sf(xlim = xval, ylim = yval)+
 
