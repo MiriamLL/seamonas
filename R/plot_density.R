@@ -20,7 +20,7 @@ plot_density<-function(density_grid=density_grid,
   yval<-c(3380000,3680000)
   ybreaks<-c(53,54, 55,56)
 
-  density_grid$mean_density<-density_grid[[column_density]]
+  density_grid$column_density<-density_grid[[column_density]]
 
   # load shapefiles
   Europa<-sf::st_transform(GermanNorthSea::German_land, my_CRS)
@@ -31,10 +31,11 @@ plot_density<-function(density_grid=density_grid,
     # maps
     ggplot2::geom_sf(data = EEZ, colour = 'black', fill = color_water)+
     ggplot2::geom_sf(data = Europa, colour = 'black', fill = color_land)+
-    ggplot2::geom_sf(data = density_grid,mapping = ggplot2::aes(fill = mean_density), lwd = 0, colour = NA) +
+    ggplot2::geom_sf(data = density_grid,mapping = ggplot2::aes(fill = column_density), lwd = 0, colour = NA) +
     ggplot2::coord_sf(xlim = xval, ylim = yval)+
 
     NULL
 
+  density_grid$column_density<-NULL
   return(density_plot)
 }
