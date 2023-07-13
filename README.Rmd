@@ -24,8 +24,8 @@ The goal of seamonas is to provide tools to make plots of the North Sea
 
 Contains data:  
 - Data from a random generated survey in CRS 3035 and CRS 4326   
-- Data from random generated densities 
-- A grid generated using the function create_grid in CRS 3035
+- Data from random generated densities  
+- A grid generated using the function create_grid in CRS 3035 
 
 Contains functions for spatial analyses:  
 - transform_survey  
@@ -55,9 +55,7 @@ library('seamonas')
 
 # Data
 
-```{r}
-head(survey_4326)
-```
+Data randomly generated to simulate surveys, density data and data on grids
 
 ## survey data
 
@@ -68,19 +66,30 @@ survey_4326<-survey_4326
 ```
 
 ```{r}
+head(survey_4326)
+```
+
+```{r}
 ggplot2::ggplot()+
     ggplot2::geom_point(data=survey_4326,
                         ggplot2::aes(x=longitude, y= latitude, color=date),size = 1, shape = 16) 
 ```
 
 
-## density data
+## density survey
 
-A data frame with survey data including observations
+A data frame with survey data including observations, includes 2000 observations of 10 variables
+
+```{r}
+density_survey<-density_survey
+```
 
 ```{r, eval=FALSE}
-density_survey
+head(density_survey)
 ```
+
+## density df
+
 
 ```{r,echo=FALSE, eval=FALSE}
 ## Create data frame
@@ -138,10 +147,16 @@ density_df$densities<-as.numeric(random4$random5)
 save(density_df, file = "density_df.RData", version = 2)
 ```
 
+A data frame with survey data includes 50 observations of 10 variables
+
+```{r}
+density_df<-density_df
+```
 
 ```{r}
 head(density_df)
 ```
+
 
 ## grid 5x5
 
@@ -151,21 +166,29 @@ A grid 5x5 in CRS 3035
 grid5x5_3035<-grid5x5_3035
 ```
 
-```{r,eval=FALSE}
+```{r,eval=FALSE, eval=FALSE}
 plot(grid5x5_3035)
 ```
 
-## 3.4. surveyed grid
+```{r}
+head(grid5x5_3035)
+```
+
+## surveyed grid
 
 The surveyed grid, this means the grid cells were data was collected
 
 ```{r, eval=FALSE}
-grid_surveyed
+grid_surveyed<-grid_surveyed
 ```
 
-
+```{r}
+head(grid_surveyed)
+```
 
 # Survey grid
+
+Spatial functions to transform the data
 
 ## transform_survey
 
@@ -193,9 +216,9 @@ grid_surveyed<-subset_grid(survey_grid=grid5x5_3035,
 ```
 
 
-## plot to check grid
+plot to check grid
 
-```{r}
+```{r, fig.height=4}
 ggplot2::ggplot()+
   ggplot2::geom_sf(data = grid_surveyed, colour = "#42a921", fill= '#bde0fe',alpha=0.9)+
   ggplot2::geom_sf(data = survey_3035)+
@@ -233,13 +256,15 @@ density_grid<-subset_density(density_survey=densities_3035,column_density='densi
 
 Check the data
 
-```{r}
+```{r, fig.height=4}
 ggplot2::ggplot()+
   ggplot2::geom_sf(data = density_grid,mapping = ggplot2::aes(fill = mean_density), lwd = 0, colour = NA)
 ```
 
 
-# Plot densities
+# Plots
+
+Functions to facilitate plotting on the same style
 
 ## plot_density
 

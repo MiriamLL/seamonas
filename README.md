@@ -12,8 +12,8 @@ The goal of seamonas is to provide tools to make plots of the North Sea
 
 Contains data:  
 - Data from a random generated survey in CRS 3035 and CRS 4326  
-- Data from random generated densities - A grid generated using the
-function create_grid in CRS 3035
+- Data from random generated densities  
+- A grid generated using the function create_grid in CRS 3035
 
 Contains functions for spatial analyses:  
 - transform_survey  
@@ -42,6 +42,17 @@ library('seamonas')
 
 # Data
 
+Data randomly generated to simulate surveys, density data and data on
+grids
+
+## survey data
+
+Data from a survey including longitude, latitude, timestamp
+
+``` r
+survey_4326<-survey_4326
+```
+
 ``` r
 head(survey_4326)
 #>    seq survey_id longitude latitude          timestamps year month day
@@ -60,14 +71,6 @@ head(survey_4326)
 #> 6 2018-04-01
 ```
 
-## survey data
-
-Data from a survey including longitude, latitude, timestamp
-
-``` r
-survey_4326<-survey_4326
-```
-
 ``` r
 ggplot2::ggplot()+
     ggplot2::geom_point(data=survey_4326,
@@ -76,12 +79,25 @@ ggplot2::ggplot()+
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
 
-## density data
+## density survey
 
-A data frame with survey data including observations
+A data frame with survey data including observations, includes 2000
+observations of 10 variables
 
 ``` r
-density_survey
+density_survey<-density_survey
+```
+
+``` r
+head(density_survey)
+```
+
+## density df
+
+A data frame with survey data includes 50 observations of 10 variables
+
+``` r
+density_df<-density_df
 ```
 
 ``` r
@@ -114,15 +130,53 @@ grid5x5_3035<-grid5x5_3035
 plot(grid5x5_3035)
 ```
 
-## 3.4. surveyed grid
+``` r
+head(grid5x5_3035)
+#>                                                                                    my_grid
+#> 1 3910000, 3915000, 3915000, 3910000, 3910000, 3380000, 3380000, 3385000, 3385000, 3380000
+#> 2 3915000, 3920000, 3920000, 3915000, 3915000, 3380000, 3380000, 3385000, 3385000, 3380000
+#> 3 3920000, 3925000, 3925000, 3920000, 3920000, 3380000, 3380000, 3385000, 3385000, 3380000
+#> 4 3925000, 3930000, 3930000, 3925000, 3925000, 3380000, 3380000, 3385000, 3385000, 3380000
+#> 5 3930000, 3935000, 3935000, 3930000, 3930000, 3380000, 3380000, 3385000, 3385000, 3380000
+#> 6 3935000, 3940000, 3940000, 3935000, 3935000, 3380000, 3380000, 3385000, 3385000, 3380000
+#>   grid_id
+#> 1       1
+#> 2       2
+#> 3       3
+#> 4       4
+#> 5       5
+#> 6       6
+```
+
+## surveyed grid
 
 The surveyed grid, this means the grid cells were data was collected
 
 ``` r
-grid_surveyed
+grid_surveyed<-grid_surveyed
+```
+
+``` r
+head(grid_surveyed)
+#>     grid_identifier grid_id  n
+#> 464             464     464 10
+#> 531             531     531 11
+#> 532             532     532  4
+#> 598             598     598 12
+#> 599             599     599  4
+#> 600             600     600  6
+#>                                                                                     geometry
+#> 464 4185000, 4190000, 4190000, 4185000, 4185000, 3410000, 3410000, 3415000, 3415000, 3410000
+#> 531 4180000, 4185000, 4185000, 4180000, 4180000, 3415000, 3415000, 3420000, 3420000, 3415000
+#> 532 4185000, 4190000, 4190000, 4185000, 4185000, 3415000, 3415000, 3420000, 3420000, 3415000
+#> 598 4175000, 4180000, 4180000, 4175000, 4175000, 3420000, 3420000, 3425000, 3425000, 3420000
+#> 599 4180000, 4185000, 4185000, 4180000, 4180000, 3420000, 3420000, 3425000, 3425000, 3420000
+#> 600 4185000, 4190000, 4190000, 4185000, 4185000, 3420000, 3420000, 3425000, 3425000, 3420000
 ```
 
 # Survey grid
+
+Spatial functions to transform the data
 
 ## transform_survey
 
@@ -150,7 +204,7 @@ grid_surveyed<-subset_grid(survey_grid=grid5x5_3035,
                       grid_identifier='grid_id')
 ```
 
-## plot to check grid
+plot to check grid
 
 ``` r
 ggplot2::ggplot()+
@@ -159,7 +213,7 @@ ggplot2::ggplot()+
   NULL
 ```
 
-<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-18-1.png" width="100%" />
 
 # Densities grid
 
@@ -193,9 +247,11 @@ ggplot2::ggplot()+
   ggplot2::geom_sf(data = density_grid,mapping = ggplot2::aes(fill = mean_density), lwd = 0, colour = NA)
 ```
 
-<img src="man/figures/README-unnamed-chunk-17-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-21-1.png" width="100%" />
 
-# Plot densities
+# Plots
+
+Functions to facilitate plotting on the same style
 
 ## plot_density
 
@@ -226,7 +282,7 @@ density_plot<-ggplot2::ggplot()+
 density_plot
 ```
 
-<img src="man/figures/README-unnamed-chunk-19-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-23-1.png" width="100%" />
 
 ## add_breaks
 
