@@ -33,6 +33,5 @@ a plot with the legend inside a defined limits
 A function to add the legend inside the plot
 }
 \examples{
-add_legend(plot_wbreaks=plot_wbreaks,legtx=3905000,
-legty=3510000,legxy=c(0.11, 0.21),xval=c(3910000,4250000),yval=c(3380000,3680000))
+add_legend(plot_wbreaks=plot_wbreaks,legtx=3905000,legty=3510000,legxy=c(0.11, 0.21),xval=c(3910000,4250000),yval=c(3380000,3680000))
 }

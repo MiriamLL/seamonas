@@ -1,17 +1,17 @@
 #' A function to add the legend inside the plot
 #'
 #' @param plot_wbreaks is the plot already with selected breaks in the colors
-#' @param legxy is the place where the legend will be set inside the panel
 #' @param legtx is where the title for the legend will be set in the x axis
 #' @param legty is where the title for the legend will be set in the y axis
+#' @param legxy is the place where the legend will be set inside the panel
 #' @param xval are the limits from the x axis
 #' @param yval are the limits for the y axis
 #'
 #' @return a plot with the legend inside a defined limits
 #' @export
 #'
-#' @examples add_legend(plot_wbreaks=plot_wbreaks,legtx=3905000,
-#' legty=3510000,legxy=c(0.11, 0.21),xval=c(3910000,4250000),yval=c(3380000,3680000))
+#' @examples add_legend(plot_wbreaks=plot_wbreaks,
+#' legtx=3905000,legty=3510000,legxy=c(0.11, 0.21),xval=c(3910000,4250000),yval=c(3380000,3680000))
 add_legend<-function(plot_wbreaks=plot_wbreaks,
                      legxy=legxy,
                      legtx=legtx,

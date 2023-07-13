@@ -18,7 +18,7 @@ subset_density(
 
 \item{grid_identifier}{is the name that each grid has}
 
-\item{survey_grid}{is the grid subsetted to the surveyed area}
+\item{survey_grid}{is the grid from to the surveyed area}
 }
 \value{
 a sf object with the surveyed grid and in each grid the average densities
