@@ -4,7 +4,7 @@
 \name{density_df}
 \alias{density_df}
 \title{Random generated data
-50 observations from 9 variables.}
+50 observations from 10 variables.}
 \format{
 Data frame with random generated observations
 }
@@ -13,7 +13,7 @@ data(density_df)
 }
 \description{
 Random generated data
-50 observations from 9 variables.
+50 observations from 10 variables.
 }
 \examples{
 data(density_df)

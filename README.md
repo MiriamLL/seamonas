@@ -8,22 +8,25 @@
 
 The goal of seamonas is to provide tools to make plots of the North Sea
 
-# 1. Intro
+# Intro
 
 Contains data:  
 - Data from a random generated survey in CRS 3035 and CRS 4326  
-- A grid generated using the function create_grid in CRS 3035
+- Data from random generated densities - A grid generated using the
+function create_grid in CRS 3035
 
-Contains functions:  
+Contains functions for spatial analyses:  
 - transform_survey  
 - subset_grid  
-- grid_densities  
+- grid_densities
+
+Contains function to plot:  
 - plot_density  
 - add_breaks  
 - add_legend  
 - add_theme
 
-# 2. Installation
+# Installation
 
 You can install the development version of seamonas from
 [GitHub](https://github.com/) with:
@@ -37,7 +40,7 @@ devtools::install_github("MiriamLL/seamonas")
 library('seamonas')
 ```
 
-# 3. Data
+# Data
 
 ``` r
 head(survey_4326)
@@ -57,7 +60,7 @@ head(survey_4326)
 #> 6 2018-04-01
 ```
 
-## 3.1. survey data
+## survey data
 
 Data from a survey including longitude, latitude, timestamp
 
@@ -73,7 +76,7 @@ ggplot2::ggplot()+
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
 
-## 3.2. density data
+## density data
 
 A data frame with survey data including observations
 
@@ -81,7 +84,25 @@ A data frame with survey data including observations
 density_survey
 ```
 
-## 3.3. grid 5x5
+``` r
+head(density_df)
+#>   seq survey_id longitude latitude          timestamps year month day
+#> 1   1         1  6.000000 55.10000 2018-04-01 09:00:00 2018    04  01
+#> 2   2         1  6.222222 54.97778 2018-04-01 09:01:00 2018    04  01
+#> 3   3         1  6.444444 54.85556 2018-04-01 09:02:00 2018    04  01
+#> 4   4         1  6.666667 54.73333 2018-04-01 09:03:00 2018    04  01
+#> 5   5         1  6.888889 54.61111 2018-04-01 09:04:00 2018    04  01
+#> 6   6         1  7.111111 54.48889 2018-04-01 09:05:00 2018    04  01
+#>         date
+#> 1 2018-04-01
+#> 2 2018-04-01
+#> 3 2018-04-01
+#> 4 2018-04-01
+#> 5 2018-04-01
+#> 6 2018-04-01
+```
+
+## grid 5x5
 
 A grid 5x5 in CRS 3035
 
@@ -101,9 +122,9 @@ The surveyed grid, this means the grid cells were data was collected
 grid_surveyed
 ```
 
-# 4. Survey grid
+# Survey grid
 
-## 4.1. transform_survey
+## transform_survey
 
 A function to transform data collected in latitude and longitude from
 degrees, transform from 4326 to 3035
@@ -116,7 +137,7 @@ survey_3035<-transform_survey(survey_data=survey_4326,
                  to_CRS=3035)
 ```
 
-## 4.2. subset_grid
+## subset_grid
 
 Add values to geometries of the grid, each square is a geometry or
 polygon There will be warning that variables are assumed to be spatially
@@ -129,7 +150,7 @@ grid_surveyed<-subset_grid(survey_grid=grid5x5_3035,
                       grid_identifier='grid_id')
 ```
 
-## 4.3. plot to check grid
+## plot to check grid
 
 ``` r
 ggplot2::ggplot()+
@@ -138,13 +159,13 @@ ggplot2::ggplot()+
   NULL
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
 
-# 5. Densities grid
+# Densities grid
 
 A series of functions to go from a data frame of surveyed data to a grid
 
-## 5.1. transform_survey
+## transform_survey
 
 A function to transform the CRS
 
@@ -156,7 +177,7 @@ densities_3035<-transform_survey(survey_data=density_survey,
                  to_CRS=3035)
 ```
 
-## 5.2. grid_densities
+## grid_densities
 
 A function to keep only grids with data
 
@@ -172,11 +193,11 @@ ggplot2::ggplot()+
   ggplot2::geom_sf(data = density_grid,mapping = ggplot2::aes(fill = mean_density), lwd = 0, colour = NA)
 ```
 
-<img src="man/figures/README-unnamed-chunk-15-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-17-1.png" width="100%" />
 
-# 6. Plot densities
+# Plot densities
 
-## 6.1. plot_density
+## plot_density
 
 Base data
 
@@ -205,9 +226,9 @@ density_plot<-ggplot2::ggplot()+
 density_plot
 ```
 
-<img src="man/figures/README-unnamed-chunk-17-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-19-1.png" width="100%" />
 
-## 6.2. add_breaks
+## add_breaks
 
 A function to add color palette and breaks in the legend, will vary with
 the species density estimates
@@ -220,9 +241,7 @@ plot_wbreaks<-add_breaks(density_plot=density_plot,
 plot_wbreaks
 ```
 
-<img src="man/figures/README-unnamed-chunk-18-1.png" width="100%" />
-
-## 6.3. add_legend
+## add_legend
 
 A function to add the legend inside the plot
 
@@ -235,21 +254,13 @@ plot_wlegend<-add_legend(
   xval=c(3910000,4250000),
   yval=c(3380000,3680000))
 plot_wlegend
-#> Warning in is.na(x): is.na() applied to non-(list or vector) of type
-#> 'expression'
 ```
 
-<img src="man/figures/README-unnamed-chunk-19-1.png" width="100%" />
-
-## 6.4. add_theme
+## add_theme
 
 A function to define the theme
 
 ``` r
 plot_wtheme<-add_theme(plot_wlegend = plot_wlegend)
 plot_wtheme
-#> Warning in is.na(x): is.na() applied to non-(list or vector) of type
-#> 'expression'
 ```
-
-<img src="man/figures/README-unnamed-chunk-20-1.png" width="100%" />

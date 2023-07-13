@@ -1,5 +1,5 @@
 #' Random generated data
-#' 50 observations from 9 variables.
+#' 50 observations from 10 variables.
 #' @docType data
 #' @usage data(density_df)
 #' @format Data frame with random generated observations

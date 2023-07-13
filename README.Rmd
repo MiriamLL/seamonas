@@ -20,16 +20,19 @@ knitr::opts_chunk$set(
 
 The goal of seamonas is to provide tools to make plots of the North Sea
 
-# 1. Intro
+# Intro
 
 Contains data:  
 - Data from a random generated survey in CRS 3035 and CRS 4326   
+- Data from random generated densities 
 - A grid generated using the function create_grid in CRS 3035
 
-Contains functions:  
+Contains functions for spatial analyses:  
 - transform_survey  
 - subset_grid  
 - grid_densities  
+
+Contains function to plot:  
 - plot_density  
 - add_breaks  
 - add_legend  
@@ -37,7 +40,7 @@ Contains functions:
 
 
 
-# 2. Installation
+# Installation
 
 You can install the development version of seamonas from [GitHub](https://github.com/) with:
 
@@ -50,13 +53,13 @@ devtools::install_github("MiriamLL/seamonas")
 library('seamonas')
 ```
 
-# 3. Data
+# Data
 
 ```{r}
 head(survey_4326)
 ```
 
-## 3.1. survey data
+## survey data
 
 Data from a survey including longitude, latitude, timestamp
 
@@ -71,7 +74,7 @@ ggplot2::ggplot()+
 ```
 
 
-## 3.2. density data
+## density data
 
 A data frame with survey data including observations
 
@@ -79,7 +82,68 @@ A data frame with survey data including observations
 density_survey
 ```
 
-## 3.3. grid 5x5
+```{r,echo=FALSE, eval=FALSE}
+## Create data frame
+density_df<-data.frame(
+             seq=(1:50),
+             survey_id=rep(c(1, 2, 3, 4, 5), each = 10),
+             longitude=c(seq(6, 8, length = 10),
+                         seq(6, 8, length = 10),
+                         seq(6, 8, length = 10),
+                         seq(6, 8, length = 10),
+                         seq(6, 8, length = 10)),
+             latitude=c(seq(55.1,54, length = 10),
+                        seq(55.1+0.1,54+0.1, length = 10),
+                        seq(55.1+0.2,54+0.2, length = 10),
+                        seq(55.1-0.2,54-0.2, length = 10),
+                        seq(55.1-0.1,54-0.1, length = 10)),
+             timestamps=c(
+  head(seq.POSIXt(as.POSIXct("2018-04-01 09:00:00"), as.POSIXct("2018-04-01 18:00:00"), by="min"), 10),
+  head(seq.POSIXt(as.POSIXct("2018-05-01 09:00:00"), as.POSIXct("2018-05-01 18:00:00"), by="min"), 10),
+  head(seq.POSIXt(as.POSIXct("2018-06-01 09:00:00"), as.POSIXct("2018-06-01 18:00:00"), by="min"), 10),
+  head(seq.POSIXt(as.POSIXct("2018-07-01 09:00:00"), as.POSIXct("2018-07-01 18:00:00"), by="min"), 10),
+  head(seq.POSIXt(as.POSIXct("2018-08-01 09:00:00"), as.POSIXct("2018-08-01 18:00:00"), by="min"), 10))
+)
+
+
+density_df$year<-stringr::str_sub(density_df$timestamps, 1, 4)
+density_df$month<-stringr::str_sub(density_df$timestamps, 6, 7)
+density_df$day<-stringr::str_sub(density_df$timestamps, 9, 10)
+density_df$date<-paste0(density_df$year,"-",density_df$month,"-",density_df$day)
+
+#values 0 or 1
+random1<-sample(0:1, 50, replace=TRUE)
+
+#values 0 to 5.1
+
+random2<-runif(50, min=0, max=5.1)
+
+#make data frame
+
+random3<-cbind(random1,random2)
+random3<-as.data.frame(random3)
+
+
+#substitute values
+random4<-random3 %>%
+  mutate(random5 = case_when(
+    random1 == 0 ~ 0,
+    random1 != 0 ~ random2,
+    TRUE ~ random2))
+#use as densities
+
+density_df$densities<-as.numeric(random4$random5)
+
+## Export
+save(density_df, file = "density_df.RData", version = 2)
+```
+
+
+```{r}
+head(density_df)
+```
+
+## grid 5x5
 
 A grid 5x5 in CRS 3035
 
@@ -101,9 +165,9 @@ grid_surveyed
 
 
 
-# 4. Survey grid
+# Survey grid
 
-## 4.1. transform_survey
+## transform_survey
 
 A function to transform data collected in latitude and longitude from degrees, transform from 4326 to 3035
 
@@ -116,7 +180,7 @@ survey_3035<-transform_survey(survey_data=survey_4326,
 ```
 
 
-## 4.2. subset_grid
+## subset_grid
 
 Add values to geometries of the grid, each square is a geometry or polygon
 There will be warning that variables are assumed to be spatially constant throughout all geometries
@@ -129,7 +193,7 @@ grid_surveyed<-subset_grid(survey_grid=grid5x5_3035,
 ```
 
 
-## 4.3. plot to check grid
+## plot to check grid
 
 ```{r}
 ggplot2::ggplot()+
@@ -141,11 +205,11 @@ ggplot2::ggplot()+
 
 
 
-# 5. Densities grid
+# Densities grid
 
 A series of functions to go from a data frame of surveyed data to a grid
 
-## 5.1. transform_survey
+## transform_survey
 
 A function to transform the CRS
 
@@ -157,7 +221,7 @@ densities_3035<-transform_survey(survey_data=density_survey,
                  to_CRS=3035)
 ```
 
-## 5.2. grid_densities
+## grid_densities
 
 A function to keep only grids with data
 
@@ -175,9 +239,9 @@ ggplot2::ggplot()+
 ```
 
 
-# 6. Plot densities
+# Plot densities
 
-## 6.1. plot_density
+## plot_density
 
 Base data
 
@@ -207,11 +271,11 @@ density_plot
 ```
 
 
-## 6.2. add_breaks
+## add_breaks
 
 A function to add color palette and breaks in the legend, will vary with the species density estimates
 
-```{r}
+```{r, eval=FALSE}
 plot_wbreaks<-add_breaks(density_plot=density_plot,
                      legendbreaks=c(0,0.5,1,1.5,2.0),
                      legendlimits=c(0,2),
@@ -221,11 +285,11 @@ plot_wbreaks
 
 
 
-## 6.3. add_legend
+## add_legend
 
 A function to add the legend inside the plot
 
-```{r}
+```{r, eval=FALSE}
 plot_wlegend<-add_legend(
   plot_wbreaks=plot_wbreaks,
   legtx=3905000,
@@ -237,11 +301,11 @@ plot_wlegend
 ```
 
 
-## 6.4. add_theme
+##  add_theme
 
 A function to define the theme
 
-```{r}
+```{r, eval=FALSE}
 plot_wtheme<-add_theme(plot_wlegend = plot_wlegend)
 plot_wtheme
 ```
