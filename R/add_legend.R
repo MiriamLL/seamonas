@@ -2,22 +2,13 @@
 #'
 #' @param plot_wbreaks is the plot already with selected breaks in the colors
 #' @param legxy is the place where the legend will be set inside the panel
-#' @param legtx is where the title for the legend will be set in the x axis
-#' @param legty is where the title for the legend will be set in the y axis
-#' @param xval are the limits from the x axis
-#' @param yval are the limits for the y axis
 #'
 #' @return a plot with the legend inside a defined limits
 #' @export
 #'
-#' @examples add_legend(plot_wbreaks=plot_wbreaks,legtx=3905000,
-#' legty=3510000,legxy=c(0.11, 0.21),xval=c(3910000,4250000),yval=c(3380000,3680000))
+#' @examples add_legend(plot_wbreaks=density_wmap,legxy=c(0.11, 0.21))
 add_legend<-function(plot_wbreaks=plot_wbreaks,
-                     legxy=legxy,
-                     legtx=legtx,
-                     legty=legty,
-                     xval=xval,
-                     yval=yval){
+                     legxy=legxy){
 
   plot_wlegend<-plot_wbreaks+
     ggplot2::theme(
@@ -33,12 +24,8 @@ add_legend<-function(plot_wbreaks=plot_wbreaks,
 
       #size
       legend.key.size =  ggplot2::unit(0.7, 'cm')
-    )+
-
-    ggplot2::annotate(geom="text",
-                      x=legtx, y=legty,
-                      label=expression(atop("Density"), paste("[ind/k", m^2,"]")),
-                      color="#343a40",hjust = 0)
+    )
 
   return(plot_wlegend)
 }
+

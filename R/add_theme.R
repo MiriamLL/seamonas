@@ -5,7 +5,7 @@
 #' @return a plot with specific colors and lines around, a little bit like theme_bw but with latitude and longitude
 #' @export
 #'
-#' @examples add_theme(plot_wlegend = plot_wbreaks)
+#' @examples add_theme(plot_wlegend = density_wmap)
 add_theme<-function(plot_wlegend=plot_wlegend){
 
   plot_wtheme<-plot_wlegend+
