@@ -26,7 +26,7 @@ Contains function to plot:
 - add_legend  
 - add_theme
 
-# Installation
+3# Installation
 
 You can install the development version of seamonas from
 [GitHub](https://github.com/) with:
@@ -109,13 +109,13 @@ head(density_df)
 #> 4   4         1  6.666667 54.73333 2018-04-01 09:03:00 2018    04  01
 #> 5   5         1  6.888889 54.61111 2018-04-01 09:04:00 2018    04  01
 #> 6   6         1  7.111111 54.48889 2018-04-01 09:05:00 2018    04  01
-#>         date
-#> 1 2018-04-01
-#> 2 2018-04-01
-#> 3 2018-04-01
-#> 4 2018-04-01
-#> 5 2018-04-01
-#> 6 2018-04-01
+#>         date densities
+#> 1 2018-04-01 3.4434922
+#> 2 2018-04-01 4.0819041
+#> 3 2018-04-01 0.0000000
+#> 4 2018-04-01 0.1747424
+#> 5 2018-04-01 0.0000000
+#> 6 2018-04-01 1.5826213
 ```
 
 ## grid 5x5
@@ -236,8 +236,10 @@ densities_3035<-transform_survey(survey_data=density_survey,
 A function to keep only grids with data
 
 ``` r
-density_grid<-subset_density(density_survey=densities_3035,column_density='densities',
-                             survey_grid=grid_surveyed,grid_identifier='grid_id')
+density_grid<-subset_density(density_survey=densities_3035,
+                             column_density='densities',
+                             survey_grid=grid_surveyed,
+                             grid_identifier='grid_id')
 ```
 
 Check the data
@@ -253,7 +255,119 @@ ggplot2::ggplot()+
 
 Functions to facilitate plotting on the same style
 
-## plot_density
+``` r
+library(sf)
+#> Linking to GEOS 3.9.3, GDAL 3.5.2, PROJ 8.2.1; sf_use_s2() is TRUE
+library(GermanNorthSea)
+library(ggplot2)
+#> Warning: package 'ggplot2' was built under R version 4.2.3
+```
+
+## Points
+
+Base map
+
+Define parameters, for this example the CRS **4326** is to be used.
+
+``` r
+my_CRS<-4326
+Europa<-sf::st_transform(German_land, my_CRS)
+EEZ<-sf::st_transform(German_EEZ, my_CRS)
+color_land='#f7bf54'
+color_water='#3668b4'
+xval<-c(3,9)
+yval<-c(53,56)
+```
+
+``` r
+Base_map<-ggplot2::ggplot()+
+    # maps
+    ggplot2::geom_sf(data = EEZ, colour = 'black', fill = color_water)+
+    ggplot2::geom_sf(data = Europa, colour = 'black', fill = color_land)+ 
+    ggplot2::coord_sf(xlim = xval, ylim = yval)+
+
+    NULL
+Base_map
+```
+
+<img src="man/figures/README-unnamed-chunk-24-1.png" width="100%" />
+
+### Add dots
+
+Data from **density_df** will be used, define shape, size and labels.
+
+``` r
+class0<-0
+class1<-1
+class2<-2.5
+class3<-5
+```
+
+``` r
+density_df<-density_df %>% 
+    dplyr::mutate(density_class = dplyr::case_when(
+      densities ==  class0 ~ as.character("group0"),
+      densities >=  class0 & densities <=  class1 ~ as.character("group1"),
+      densities >=  class1 & densities <=  class2 ~ as.character("group2"),
+      densities >=  class2 & densities <=  class3 ~ as.character("group3"),
+      densities >=  class3 ~ as.character("group4"),
+      TRUE~"U"))
+```
+
+``` r
+density_sizes<-c("group0"=0.5, "group1"=1,"group2"=2, "group3"=3, "group4"=5)
+density_shapes<-c("group0"=3, "group1"=21,"group2"=21, "group3"=21, "group4"=21)
+density_labels<-c('0','> 0-1','> 1-2.5','> 2.5-5','> 5')
+```
+
+``` r
+density_wmap<-Base_map+
+  geom_point(data=density_df,
+          aes(x = longitude,
+              y= latitude,
+              shape = density_class,
+              size= density_class),
+              fill= "#d00000")+
+  
+  scale_shape_manual(values = density_shapes,labels=density_labels)+
+  scale_size_manual(values =  density_sizes,labels=density_labels)
+density_wmap
+```
+
+<img src="man/figures/README-unnamed-chunk-28-1.png" width="100%" />
+
+### add_legend
+
+A function to add the legend inside the plot
+
+``` r
+density_wlegend<-add_legend(
+  plot_wbreaks=density_wmap,
+  legxy=c(0.11, 0.21))
+```
+
+``` r
+density_wlegend<-density_wlegend+
+  theme(legend.key.size = ggplot2::unit(0.4, "cm"))+
+  ggplot2::annotate(geom="text",
+                      x=3.0, y=54.0,
+                      label=expression(atop("Density"), paste("[ind/k", m^2,"]")),
+                      color="#343a40",hjust = 0)
+density_wlegend
+```
+
+<img src="man/figures/README-unnamed-chunk-32-1.png" width="100%" />
+
+### add_theme
+
+``` r
+density_wtheme<-add_theme(plot_wlegend = density_wlegend)
+density_wtheme
+```
+
+<img src="man/figures/README-unnamed-chunk-34-1.png" width="100%" />
+
+# Grid
 
 Base data
 
@@ -282,12 +396,44 @@ density_plot<-ggplot2::ggplot()+
 density_plot
 ```
 
-<img src="man/figures/README-unnamed-chunk-23-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-36-1.png" width="100%" />
 
 ## add_breaks
 
 A function to add color palette and breaks in the legend, will vary with
 the species density estimates
+
+``` r
+add_breaks<-function(density_plot=density_plot,
+                     legendbreaks=legendbreaks,
+                     legendlimits=legendlimits,
+                     legendlabels=legendlabels){
+
+  plot_wbreaks<-density_plot+
+    ggplot2::scale_fill_gradientn(
+
+      colours = c("#f1faee", #0 white
+                  "#4ea8de", #0.10 lightblue
+                  '#1e6091', #0.20 darkblue
+                  "#34a0a4", #0.30 darkgreen
+                  '#76c893', #0.40 lightgreen
+                  '#d9ed92', #0.50 darkyellow
+                  "#ffea00", #0.60 bringyellow
+                  "#f1ba0a", #0.70 organge
+                  '#ff4800', #0.80 darkorgance
+                  "#e01e37", #0.90 lightred
+                  '#6e1423'  #1.0 darkred
+      ),
+      #the values are according to the size of the scale (100%), not values of the column
+      values = c(0, 0.10,0.20,0.30,0.40,0.50,0.60,0.70,0.80,0.90,1.0),
+
+      limits=legendlimits,
+      breaks=legendbreaks,
+      labels=legendlabels)+
+    ggplot2::guides(fill = ggplot2::guide_colourbar(ticks = FALSE))
+  return(plot_wbreaks)
+}
+```
 
 ``` r
 plot_wbreaks<-add_breaks(density_plot=density_plot,
@@ -297,6 +443,8 @@ plot_wbreaks<-add_breaks(density_plot=density_plot,
 plot_wbreaks
 ```
 
+<img src="man/figures/README-unnamed-chunk-38-1.png" width="100%" />
+
 ## add_legend
 
 A function to add the legend inside the plot
@@ -304,13 +452,20 @@ A function to add the legend inside the plot
 ``` r
 plot_wlegend<-add_legend(
   plot_wbreaks=plot_wbreaks,
-  legtx=3905000,
-  legty=3510000,
-  legxy=c(0.11, 0.21),
-  xval=c(3910000,4250000),
-  yval=c(3380000,3680000))
+  legxy=c(0.11, 0.21))
+```
+
+``` r
+plot_wlegend<-plot_wlegend+
+  ggplot2::theme(legend.key.size =  ggplot2::unit(0.7, 'cm'))+
+  ggplot2::annotate(geom="text",
+                      x=3905000, y=3510000,
+                      label=expression(atop("Density"), paste("[ind/k", m^2,"]")),
+                      color="#343a40",hjust = 0)
 plot_wlegend
 ```
+
+<img src="man/figures/README-unnamed-chunk-40-1.png" width="100%" />
 
 ## add_theme
 
@@ -320,3 +475,5 @@ A function to define the theme
 plot_wtheme<-add_theme(plot_wlegend = plot_wlegend)
 plot_wtheme
 ```
+
+<img src="man/figures/README-unnamed-chunk-42-1.png" width="100%" />
