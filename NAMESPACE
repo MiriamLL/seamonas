@@ -3,6 +3,7 @@
 export("%>%")
 export(add_legend)
 export(add_theme)
+export(classify_taxonomic)
 export(load_basemap)
 export(plot_density)
 export(subset_density)
