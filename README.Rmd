@@ -63,8 +63,9 @@ Data randomly generated to simulate surveys, density data and data on grids
 library(tidyverse)
 ```
 
-```{r}
-Euring2<-seamonas::classify_taxonomic(my_data=Euring,col_name = "ENGLISH_NAME")
+
+```{r, eval=FALSE, echo=FALSE}
+Euring2<-seamonas::classify_taxonomic(my_data=Code_Euring,col_name = "English_name")
 ```
 
 ```{r TaxonomicGroup, echo=FALSE, eval=TRUE}

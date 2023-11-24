@@ -11,7 +11,6 @@ The goal of seamonas is to provide tools to make plots of the North Sea
 # Intro
 
 Contains data:  
-- Euring codes and taxonomic grouping  
 - Data from a random generated survey in CRS 3035 and CRS 4326  
 - Data from random generated densities  
 - A grid generated using the function create_grid in CRS 3035
@@ -27,7 +26,7 @@ Contains function to plot:
 - add_legend  
 - add_theme
 
-# Installation
+3# Installation
 
 You can install the development version of seamonas from
 [GitHub](https://github.com/) with:
@@ -50,6 +49,14 @@ grids
 
 ``` r
 library(tidyverse)
+#> Warning: package 'tidyverse' was built under R version 4.2.3
+#> Warning: package 'ggplot2' was built under R version 4.2.3
+#> Warning: package 'tibble' was built under R version 4.2.3
+#> Warning: package 'readr' was built under R version 4.2.3
+#> Warning: package 'purrr' was built under R version 4.2.3
+#> Warning: package 'dplyr' was built under R version 4.2.3
+#> Warning: package 'forcats' was built under R version 4.2.3
+#> Warning: package 'lubridate' was built under R version 4.2.3
 #> ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 #> ✔ dplyr     1.1.3     ✔ readr     2.1.4
 #> ✔ forcats   1.0.0     ✔ stringr   1.5.0
