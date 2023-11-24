@@ -11,6 +11,7 @@ The goal of seamonas is to provide tools to make plots of the North Sea
 # Intro
 
 Contains data:  
+- Euring codes and taxonomic grouping  
 - Data from a random generated survey in CRS 3035 and CRS 4326  
 - Data from random generated densities  
 - A grid generated using the function create_grid in CRS 3035
@@ -26,7 +27,7 @@ Contains function to plot:
 - add_legend  
 - add_theme
 
-3# Installation
+# Installation
 
 You can install the development version of seamonas from
 [GitHub](https://github.com/) with:
@@ -44,6 +45,22 @@ library('seamonas')
 
 Data randomly generated to simulate surveys, density data and data on
 grids
+
+## classification by euring
+
+``` r
+library(tidyverse)
+#> ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+#> ✔ dplyr     1.1.3     ✔ readr     2.1.4
+#> ✔ forcats   1.0.0     ✔ stringr   1.5.0
+#> ✔ ggplot2   3.4.3     ✔ tibble    3.2.1
+#> ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+#> ✔ purrr     1.0.2     
+#> ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+#> ✖ dplyr::filter() masks stats::filter()
+#> ✖ dplyr::lag()    masks stats::lag()
+#> ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+```
 
 ## survey data
 
@@ -77,7 +94,7 @@ ggplot2::ggplot()+
                         ggplot2::aes(x=longitude, y= latitude, color=date),size = 1, shape = 16) 
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
 
 ## density survey
 
@@ -213,7 +230,7 @@ ggplot2::ggplot()+
   NULL
 ```
 
-<img src="man/figures/README-unnamed-chunk-18-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-20-1.png" width="100%" />
 
 # Densities grid
 
@@ -249,7 +266,7 @@ ggplot2::ggplot()+
   ggplot2::geom_sf(data = density_grid,mapping = ggplot2::aes(fill = mean_density), lwd = 0, colour = NA)
 ```
 
-<img src="man/figures/README-unnamed-chunk-21-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-23-1.png" width="100%" />
 
 # Plots
 
@@ -260,7 +277,6 @@ library(sf)
 #> Linking to GEOS 3.9.3, GDAL 3.5.2, PROJ 8.2.1; sf_use_s2() is TRUE
 library(GermanNorthSea)
 library(ggplot2)
-#> Warning: package 'ggplot2' was built under R version 4.2.3
 ```
 
 ## Points
@@ -290,7 +306,7 @@ Base_map<-ggplot2::ggplot()+
 Base_map
 ```
 
-<img src="man/figures/README-unnamed-chunk-24-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-26-1.png" width="100%" />
 
 ### Add dots
 
@@ -334,7 +350,7 @@ density_wmap<-Base_map+
 density_wmap
 ```
 
-<img src="man/figures/README-unnamed-chunk-28-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-30-1.png" width="100%" />
 
 ### add_legend
 
@@ -356,7 +372,7 @@ density_wlegend<-density_wlegend+
 density_wlegend
 ```
 
-<img src="man/figures/README-unnamed-chunk-32-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-34-1.png" width="100%" />
 
 ### add_theme
 
@@ -365,7 +381,7 @@ density_wtheme<-add_theme(plot_wlegend = density_wlegend)
 density_wtheme
 ```
 
-<img src="man/figures/README-unnamed-chunk-34-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-36-1.png" width="100%" />
 
 # Grid
 
@@ -396,7 +412,7 @@ density_plot<-ggplot2::ggplot()+
 density_plot
 ```
 
-<img src="man/figures/README-unnamed-chunk-36-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-38-1.png" width="100%" />
 
 ## add_breaks
 
@@ -443,7 +459,7 @@ plot_wbreaks<-add_breaks(density_plot=density_plot,
 plot_wbreaks
 ```
 
-<img src="man/figures/README-unnamed-chunk-38-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-40-1.png" width="100%" />
 
 ## add_legend
 
@@ -465,7 +481,7 @@ plot_wlegend<-plot_wlegend+
 plot_wlegend
 ```
 
-<img src="man/figures/README-unnamed-chunk-40-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-42-1.png" width="100%" />
 
 ## add_theme
 
@@ -476,4 +492,4 @@ plot_wtheme<-add_theme(plot_wlegend = plot_wlegend)
 plot_wtheme
 ```
 
-<img src="man/figures/README-unnamed-chunk-42-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-44-1.png" width="100%" />
