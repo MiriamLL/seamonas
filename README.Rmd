@@ -23,6 +23,8 @@ The goal of seamonas is to provide tools to make plots of the North Sea
 # Intro
 
 Contains data:  
+- Euring with taxonomic groupping
+
 - Data from a random generated survey in CRS 3035 and CRS 4326   
 - Data from random generated densities  
 - A grid generated using the function create_grid in CRS 3035 
@@ -59,14 +61,6 @@ Data randomly generated to simulate surveys, density data and data on grids
 
 ## classification by euring
 
-```{r}
-library(tidyverse)
-```
-
-
-```{r, eval=FALSE, echo=FALSE}
-Euring2<-seamonas::classify_taxonomic(my_data=Code_Euring,col_name = "English_name")
-```
 
 ```{r TaxonomicGroup, echo=FALSE, eval=TRUE}
 ImportTaxonomicGroups<-function(Species){
@@ -114,11 +108,49 @@ assign('OtherBirds',OtherBirds,envir=globalenv())
 assign('Mammals',Mammals,envir=globalenv())
 }
 ImportTaxonomicGroups(Species)
+
+Code_Euring$TaxGroups<-ifelse(Code_Euring$English_name %in% Divers, "Divers",
+                        ifelse(Code_Euring$English_name %in% Cormorant_Gannets, "Cormorant_Gannets",
+                        ifelse(Code_Euring$English_name %in% Anatidae, "Anatidae",
+                        ifelse(Code_Euring$English_name %in% Geese_Shelducks, "Geese_Shelducks",
+                        ifelse(Code_Euring$English_name %in% Skuas, "Skuas",
+                        ifelse(Code_Euring$English_name %in% Auks, "Auks",
+                        ifelse(Code_Euring$English_name %in% Grebes, "Grebes",
+                        ifelse(Code_Euring$English_name %in% Waders, "Waders",
+                        ifelse(Code_Euring$English_name %in% Gulls, "Gulls",
+                        ifelse(Code_Euring$English_name %in% Terns, "Terns",
+                        ifelse(Code_Euring$English_name %in% OtherBirds, "OtherBirds", 
+                        ifelse(Code_Euring$English_name %in% Mammals, "Mammals","Not included yet"))))))))))))
 ```
 
 
+```{r, eval=FALSE, echo=FALSE}
+Euring2<-seamonas::classify_taxonomic(my_data=Code_Euring,col_name = "English_name")
+```
 
+```{r, echo=FALSE, eval=FALSE}
+Code_Euring$TaxGroups[1:5]<-'Divers'
+Code_Euring$TaxGroups[6:14]<-'Grebes'
+Code_Euring$TaxGroups[15:33]<-'Other_seabirds'
+Code_Euring$TaxGroups[34:40]<-'Gannets_Cormorants'
+Code_Euring$TaxGroups[41:57]<-'Other_species'
+Code_Euring$TaxGroups[58:83]<-'Swan_Geese'
+Code_Euring$TaxGroups[84:126]<-'Ducks_Shelducks'
+Code_Euring$TaxGroups[127:176]<-'Other_species'
+Code_Euring$TaxGroups[177:236]<-'Waders'
+Code_Euring$TaxGroups[237:243]<-'Skuas'
+Code_Euring$TaxGroups[244:273]<-'Gulls'
+Code_Euring$TaxGroups[274:288]<-'Terns'
+Code_Euring$TaxGroups[289:296]<-'Auks'
+Code_Euring$TaxGroups[297:528]<-'Other_species'
+Code_Euring$TaxGroups[529:546]<-'Marine_mammals'
+Code_Euring$TaxGroups[547:549]<-'Other_species'
+```
 
+```{r}
+Euring_code<-seamonas::Code_Euring
+head(Euring_code)
+```
 
 
 ## survey data
