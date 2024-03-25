@@ -11,7 +11,9 @@ The goal of seamonas is to provide tools to make plots of the North Sea
 # Intro
 
 Contains data:  
-- Euring with taxonomic groupping
+- Euring data with taxonomic grouping Last update: Mar-2024 Base
+information from November 2023
+(<https://euring.org/data-and-codes/euring-codes>)
 
 - Data from a random generated survey in CRS 3035 and CRS 4326  
 - Data from random generated densities  
@@ -93,7 +95,7 @@ ggplot2::ggplot()+
                         ggplot2::aes(x=longitude, y= latitude, color=date),size = 1, shape = 16) 
 ```
 
-<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
 
 ## density survey
 
@@ -229,7 +231,7 @@ ggplot2::ggplot()+
   NULL
 ```
 
-<img src="man/figures/README-unnamed-chunk-21-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-23-1.png" width="100%" />
 
 # Densities grid
 
@@ -265,7 +267,7 @@ ggplot2::ggplot()+
   ggplot2::geom_sf(data = density_grid,mapping = ggplot2::aes(fill = mean_density), lwd = 0, colour = NA)
 ```
 
-<img src="man/figures/README-unnamed-chunk-24-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-26-1.png" width="100%" />
 
 # Plots
 
@@ -307,7 +309,7 @@ Base_map<-ggplot2::ggplot()+
 Base_map
 ```
 
-<img src="man/figures/README-unnamed-chunk-27-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-29-1.png" width="100%" />
 
 ### Add dots
 
@@ -351,7 +353,7 @@ density_wmap<-Base_map+
 density_wmap
 ```
 
-<img src="man/figures/README-unnamed-chunk-31-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-33-1.png" width="100%" />
 
 ### add_legend
 
@@ -373,7 +375,7 @@ density_wlegend<-density_wlegend+
 density_wlegend
 ```
 
-<img src="man/figures/README-unnamed-chunk-35-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-37-1.png" width="100%" />
 
 ### add_theme
 
@@ -382,7 +384,7 @@ density_wtheme<-add_theme(plot_wlegend = density_wlegend)
 density_wtheme
 ```
 
-<img src="man/figures/README-unnamed-chunk-37-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-39-1.png" width="100%" />
 
 # Grid
 
@@ -413,7 +415,7 @@ density_plot<-ggplot2::ggplot()+
 density_plot
 ```
 
-<img src="man/figures/README-unnamed-chunk-39-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-41-1.png" width="100%" />
 
 ## add_breaks
 
@@ -460,7 +462,7 @@ plot_wbreaks<-add_breaks(density_plot=density_plot,
 plot_wbreaks
 ```
 
-<img src="man/figures/README-unnamed-chunk-41-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-43-1.png" width="100%" />
 
 ## add_legend
 
@@ -482,7 +484,7 @@ plot_wlegend<-plot_wlegend+
 plot_wlegend
 ```
 
-<img src="man/figures/README-unnamed-chunk-43-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-45-1.png" width="100%" />
 
 ## add_theme
 
@@ -493,4 +495,4 @@ plot_wtheme<-add_theme(plot_wlegend = plot_wlegend)
 plot_wtheme
 ```
 
-<img src="man/figures/README-unnamed-chunk-45-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-47-1.png" width="100%" />

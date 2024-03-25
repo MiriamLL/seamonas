@@ -23,7 +23,60 @@ The goal of seamonas is to provide tools to make plots of the North Sea
 # Intro
 
 Contains data:  
-- Euring with taxonomic groupping
+- Euring data with taxonomic grouping
+Last update: Mar-2024
+Base information from November 2023 (https://euring.org/data-and-codes/euring-codes)
+
+
+```{r, eval=FALSE, echo=FALSE}
+# Correct after 2024, according to SQL data base
+library(seamonas)
+Code_Euring<-Code_Euring
+## Check which code needs to be corrected
+Code_Euring %>% filter(Code=='6169')
+## Check that the code is not currently on use
+Code_Euring %>% filter(Code=='6159')
+## Substitute
+Code_Euring$Code<-gsub('6169', '6159',Code_Euring$Code)
+## Check that was correctly saved
+Code_Euring %>% filter(Code=='6159')
+# Check that it was removed
+Code_Euring %>% filter(Code=='6169')
+## Save
+save(Code_Euring, file = "Code_Euring.RData", version = 2)
+```
+
+```{r, eval=FALSE, echo=FALSE}
+library(seamonas)
+Euring_codes1<-Code_Euring
+Euring_codes1$English_name<-gsub("/", " / ",Euring_codes1$English_name) 
+
+library(tidyverse)
+
+library(readr)
+Euring_codes2a <- read_csv("data/SpeciesCodes2020_20231114_0.csv")
+colnames(Euring_codes2a)<-c('Code','Scientific_name2','Updated_Date')
+Euring_codes2b<-Euring_codes2a %>% select(Code,Scientific_name2)
+
+library(readxl)
+Euring_codes3a<-read_excel("data/LKP_EURING.xlsx")
+Euring_codes3b<-Euring_codes3a %>% select(CODE,SCIENTIFIC_NAME,ENGLISH_NAME)
+Euring_codes3c<-Euring_codes3b %>% rename(Code=CODE, Scientific_name3=SCIENTIFIC_NAME,English_name3=ENGLISH_NAME)
+
+Euring_codes4<-merge(Euring_codes1,Euring_codes2b,by='Code',all=TRUE)
+Euring_codes5<-merge(Euring_codes4,Euring_codes3c,by='Code',all=TRUE)
+Euring_codes5<-Euring_codes5 %>%
+  select(Code,Scientific_name,Scientific_name2,Scientific_name3,English_name,English_name3)
+
+Euring_codes6 <- Euring_codes5 %>%
+  drop_na(Scientific_name3)
+
+Euring_codes6 <- Euring_codes6 %>%
+  mutate(Same_names=if_else(English_name == English_name3, "equal", "different"))
+Euring_codes7<-Euring_codes6 %>%
+  filter(Same_names=='different')
+```
+
 
 - Data from a random generated survey in CRS 3035 and CRS 4326   
 - Data from random generated densities  
