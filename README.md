@@ -11,9 +11,11 @@ The goal of seamonas is to provide tools to make plots of the North Sea
 # Intro
 
 Contains data:  
-- Euring data with taxonomic grouping Last update: Mar-2024 Base
-information from November 2023
-(<https://euring.org/data-and-codes/euring-codes>)
+- Euring data with taxonomic grouping  
+Last update: Mar-2024  
+Base information from November 2023
+(<https://euring.org/data-and-codes/euring-codes>)  
+Except 6169 was changed to 6159.
 
 - Data from a random generated survey in CRS 3035 and CRS 4326  
 - Data from random generated densities  
