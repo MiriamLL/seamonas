@@ -16,7 +16,6 @@ LazyDataCompression:xz
 Depends: R (>= 2.10)
 Imports: 
     dplyr,
-    GermanNorthSea,
     ggplot2,
     magrittr,
     sf
