@@ -1,5 +1,5 @@
 Package: seamonas
-Title: A package to calculate spatial parameters and create density and survey  maps
+Title: A package thatprovides easy access to information based on guidelines for monitoring seabirds at sea.
 Version: 0.0.0.9000
 Authors@R: 
     person("Miriam", "Lerma", , "miriamjlerma@gmail.com", role = c("aut", "cre"),
@@ -8,11 +8,11 @@ Description: A package to calculate spatial parameters and create density and su
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.2
+RoxygenNote: 7.3.2
 URL: https://github.com/MiriamLL/seamonas
 BugReports: https://github.com/MiriamLL/seamonas/issues
 LazyData: true
-LazyDataCompression:xz
+LazyDataCompression: xz
 Depends: R (>= 2.10)
 Imports: 
     dplyr,
