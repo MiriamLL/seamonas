@@ -631,7 +631,8 @@ Observations_test<-data.frame(OBSERVATIONS=NA,
                               ENGLISH_NAME_CONTROL_ID =NA, 
                               ID_MATCH_MISMATCH=NA, 
                               ENGLISH_NAME=NA, 
-                              DETECTION_STEP =NA,  
+                              DETECTION_STEP =NA, 
+                              BEHAVIOUR=NA,
                               ACTIVITY=NA,  
                               GROUP_ =NA,  
                               FAMILY_GROUP=NA, 
@@ -1743,8 +1744,6 @@ AbioticObs_test<-data.frame(OBSERVATIONS=NA,
 ```
 
 
-# ~~~~~~~~~~~~~~
-
 # Merge
 
 ```{r}
@@ -1772,5 +1771,13 @@ Observations_test2 %>%
 
 
 
+# ~~~~~~~~~~~~~~
 
+# Code_Descriptions
+
+# Save
+
+```{r}
+save(Code_Descriptions, file = "Code_Descriptions.RData", version = 2)
+```
 
