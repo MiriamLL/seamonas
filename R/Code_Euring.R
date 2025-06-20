@@ -1,4 +1,4 @@
-#' Euroring codes and artificial taxonomic classificacions
+#' Euroring codes and artificial taxonomic classifications
 #' @docType data
 #' @usage data(Code_Euring)
 #' @format Data frame with 549 obs and columns code, scientific name, english name and artififical taxonomical classification

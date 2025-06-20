@@ -3,7 +3,7 @@
 \docType{data}
 \name{Code_Euring}
 \alias{Code_Euring}
-\title{Euroring codes and artificial taxonomic classificacions}
+\title{Euroring codes and artificial taxonomic classifications}
 \format{
 Data frame with 549 obs and columns code, scientific name, english name and artififical taxonomical classification
 }
@@ -11,7 +11,7 @@ Data frame with 549 obs and columns code, scientific name, english name and arti
 data(Code_Euring)
 }
 \description{
-Euroring codes and artificial taxonomic classificacions
+Euroring codes and artificial taxonomic classifications
 }
 \examples{
 data(Code_Euring)

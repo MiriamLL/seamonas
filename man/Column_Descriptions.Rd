@@ -3,15 +3,15 @@
 \docType{data}
 \name{Column_Descriptions}
 \alias{Column_Descriptions}
-\title{Includes column names and explanation for filling them.}
+\title{Includes column names and explanation for filling them}
 \format{
-Data frame with column names and explanations.
+Data frame with column names and explanations
 }
 \usage{
 data(Column_Descriptions)
 }
 \description{
-Includes column names and explanation for filling them.
+Includes column names and explanation for filling them
 }
 \examples{
 data(Column_Descriptions)
