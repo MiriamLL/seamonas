@@ -1,0 +1,599 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# seamonas
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of seamonas is to provide tools to make plots of the North Sea
+
+- Data from a random generated survey in CRS 3035 and CRS 4326   
+- Data from random generated densities  
+- A grid generated using the function create_grid in CRS 3035 
+
+Contains functions for spatial analyses:  
+- transform_survey  
+- subset_grid  
+- grid_densities  
+
+Contains function to plot:  
+- plot_density  
+- add_breaks  
+- add_legend  
+- add_theme  
+
+
+# Data
+
+Data randomly generated to simulate surveys, density data and data on grids
+
+## survey data
+
+Data from a survey including longitude, latitude, timestamp
+
+```{r, eval=FALSE}
+survey_4326<-survey_4326
+```
+
+```{r}
+head(survey_4326)
+```
+
+```{r}
+ggplot2::ggplot()+
+    ggplot2::geom_point(data=survey_4326,
+                        ggplot2::aes(x=longitude, y= latitude, color=date),size = 1, shape = 16) 
+```
+
+## density survey
+
+A data frame with survey data including observations, includes 2000 observations of 10 variables
+
+```{r}
+density_survey<-density_survey
+```
+
+```{r, eval=FALSE}
+head(density_survey)
+```
+
+## density df
+
+```{r,echo=FALSE, eval=FALSE}
+## Create data frame
+density_df<-data.frame(
+             seq=(1:50),
+             survey_id=rep(c(1, 2, 3, 4, 5), each = 10),
+             longitude=c(seq(6, 8, length = 10),
+                         seq(6, 8, length = 10),
+                         seq(6, 8, length = 10),
+                         seq(6, 8, length = 10),
+                         seq(6, 8, length = 10)),
+             latitude=c(seq(55.1,54, length = 10),
+                        seq(55.1+0.1,54+0.1, length = 10),
+                        seq(55.1+0.2,54+0.2, length = 10),
+                        seq(55.1-0.2,54-0.2, length = 10),
+                        seq(55.1-0.1,54-0.1, length = 10)),
+             timestamps=c(
+  head(seq.POSIXt(as.POSIXct("2018-04-01 09:00:00"), as.POSIXct("2018-04-01 18:00:00"), by="min"), 10),
+  head(seq.POSIXt(as.POSIXct("2018-05-01 09:00:00"), as.POSIXct("2018-05-01 18:00:00"), by="min"), 10),
+  head(seq.POSIXt(as.POSIXct("2018-06-01 09:00:00"), as.POSIXct("2018-06-01 18:00:00"), by="min"), 10),
+  head(seq.POSIXt(as.POSIXct("2018-07-01 09:00:00"), as.POSIXct("2018-07-01 18:00:00"), by="min"), 10),
+  head(seq.POSIXt(as.POSIXct("2018-08-01 09:00:00"), as.POSIXct("2018-08-01 18:00:00"), by="min"), 10))
+)
+
+
+density_df$year<-stringr::str_sub(density_df$timestamps, 1, 4)
+density_df$month<-stringr::str_sub(density_df$timestamps, 6, 7)
+density_df$day<-stringr::str_sub(density_df$timestamps, 9, 10)
+density_df$date<-paste0(density_df$year,"-",density_df$month,"-",density_df$day)
+
+#values 0 or 1
+random1<-sample(0:1, 50, replace=TRUE)
+
+#values 0 to 5.1
+
+random2<-runif(50, min=0, max=5.1)
+
+#make data frame
+
+random3<-cbind(random1,random2)
+random3<-as.data.frame(random3)
+
+
+#substitute values
+random4<-random3 %>%
+  mutate(random5 = case_when(
+    random1 == 0 ~ 0,
+    random1 != 0 ~ random2,
+    TRUE ~ random2))
+#use as densities
+
+density_df$densities<-as.numeric(random4$random5)
+
+## Export
+#save(density_df, file = "density_df.RData", version = 2)
+```
+
+A data frame with survey data includes 50 observations of 10 variables
+
+```{r}
+density_df<-density_df
+```
+
+```{r}
+head(density_df)
+```
+
+## grid 5x5
+
+A grid 5x5 in CRS 3035
+
+```{r}
+grid5x5_3035<-grid5x5_3035
+```
+
+```{r,eval=FALSE, eval=FALSE}
+plot(grid5x5_3035)
+```
+
+```{r}
+head(grid5x5_3035)
+```
+
+## surveyed grid
+
+The surveyed grid, this means the grid cells were data was collected
+
+```{r, eval=FALSE}
+grid_surveyed<-grid_surveyed
+```
+
+```{r}
+head(grid_surveyed)
+```
+
+# Survey grid
+
+Spatial functions to transform the data
+
+## transform_survey
+
+A function to transform data collected in latitude and longitude from degrees, transform from 4326 to 3035
+
+```{r}
+survey_3035<-transform_survey(survey_data=survey_4326,
+                 column_latitude='latitude',
+                 column_longitude='longitude',
+                 from_CRS=4326,
+                 to_CRS=3035)
+```
+
+## subset_grid
+
+Add values to geometries of the grid, each square is a geometry or polygon
+There will be warning that variables are assumed to be spatially constant throughout all geometries
+Will print a plot and return the grids with data
+
+```{r, eval=FALSE}
+grid_surveyed<-subset_grid(survey_grid=grid5x5_3035,
+                      survey_data=survey_3035,
+                      grid_identifier='grid_id')
+```
+
+plot to check grid
+
+```{r, fig.height=4}
+ggplot2::ggplot()+
+  ggplot2::geom_sf(data = grid_surveyed, colour = "#42a921", fill= '#bde0fe',alpha=0.9)+
+  ggplot2::geom_sf(data = survey_3035)+
+  NULL
+```
+
+
+# Densities grid
+
+A series of functions to go from a data frame of surveyed data to a grid
+
+## transform_survey
+
+A function to transform the CRS
+
+```{r}
+densities_3035<-transform_survey(survey_data=density_survey, 
+                 column_latitude='latitude',
+                 column_longitude='longitude',
+                 from_CRS=4326,
+                 to_CRS=3035)
+```
+
+## grid_densities
+
+A function to keep only grids with data
+
+```{r,eval=FALSE}
+density_grid<-subset_density(density_survey=densities_3035,
+                             column_density='densities',
+                             survey_grid=grid_surveyed,
+                             grid_identifier='grid_id')
+```
+
+
+Check the data
+
+```{r, fig.height=4}
+ggplot2::ggplot()+
+  ggplot2::geom_sf(data = density_grid,mapping = ggplot2::aes(fill = mean_density), lwd = 0, colour = NA)
+```
+
+
+# Plots
+
+Functions to facilitate plotting on the same style
+
+```{r}
+library(sf)
+library(GermanNorthSea)
+library(ggplot2)
+```
+
+## Points
+
+Base map
+
+Define parameters, for this example the CRS **4326** is to be used. 
+
+```{r}
+my_CRS<-4326
+Europa<-sf::st_transform(German_land, my_CRS)
+EEZ<-sf::st_transform(German_EEZ, my_CRS)
+color_land='#f7bf54'
+color_water='#3668b4'
+xval<-c(3,9)
+yval<-c(53,56)
+```
+
+```{r}
+Base_map<-ggplot2::ggplot()+
+    # maps
+    ggplot2::geom_sf(data = EEZ, colour = 'black', fill = color_water)+
+    ggplot2::geom_sf(data = Europa, colour = 'black', fill = color_land)+ 
+    ggplot2::coord_sf(xlim = xval, ylim = yval)+
+
+    NULL
+Base_map
+```
+
+### Add dots
+
+Data from **density_df** will be used, define shape, size and labels.
+
+```{r}
+class0<-0
+class1<-1
+class2<-2.5
+class3<-5
+```
+
+```{r}
+density_df<-density_df %>% 
+    dplyr::mutate(density_class = dplyr::case_when(
+      densities ==  class0 ~ as.character("group0"),
+      densities >=  class0 & densities <=  class1 ~ as.character("group1"),
+      densities >=  class1 & densities <=  class2 ~ as.character("group2"),
+      densities >=  class2 & densities <=  class3 ~ as.character("group3"),
+      densities >=  class3 ~ as.character("group4"),
+      TRUE~"U"))
+```
+
+```{r}
+density_sizes<-c("group0"=0.5, "group1"=1,"group2"=2, "group3"=3, "group4"=5)
+density_shapes<-c("group0"=3, "group1"=21,"group2"=21, "group3"=21, "group4"=21)
+density_labels<-c('0','> 0-1','> 1-2.5','> 2.5-5','> 5')
+```
+
+```{r}
+density_wmap<-Base_map+
+  geom_point(data=density_df,
+          aes(x = longitude,
+              y= latitude,
+              shape = density_class,
+              size= density_class),
+              fill= "#d00000")+
+  
+  scale_shape_manual(values = density_shapes,labels=density_labels)+
+  scale_size_manual(values =  density_sizes,labels=density_labels)
+density_wmap
+```
+
+```{r, eval=FALSE, echo=FALSE}
+#Export
+#save(density_wmap, file = "density_wmap.RData", version = 2)
+```
+
+```{r}
+### add_legend
+
+#' A function to add the legend inside the plot
+#'
+#' @param plot_wbreaks is the plot already with selected breaks in the colors
+#' @param legxy is the place where the legend will be set inside the panel
+#'
+#' @return a plot with the legend inside a defined limits
+#' @export
+#'
+#' @examples add_legend(plot_wbreaks=density_wmap,legxy=c(0.11, 0.21))
+add_legend<-function(plot_wbreaks=plot_wbreaks,
+                     legxy=legxy){
+
+  plot_wlegend<-plot_wbreaks+
+    ggplot2::theme(
+      legend.position = legxy,
+      legend.title = ggplot2::element_blank(),
+      legend.text= ggplot2::element_text(size=10,color="#343a40",family='sans'),
+      legend.spacing.y =  ggplot2::unit(0.01, 'cm'),
+      legend.spacing.x =  ggplot2::unit(0.2, 'cm'),
+
+      legend.background = ggplot2::element_rect(fill='transparent',colour ="transparent"),
+      legend.box.background = ggplot2::element_rect(fill='transparent',colour ="transparent"),
+      legend.key = ggplot2::element_rect(fill = "transparent", colour = "transparent"),
+
+      #size
+      legend.key.size =  ggplot2::unit(0.7, 'cm')
+    )
+
+  return(plot_wlegend)
+}
+```
+
+```{r}
+#' A function to add the legend inside the plot
+#'
+#' @param plot_wbreaks is the plot already with selected breaks in the colors
+#' @param legxy is the place where the legend will be set inside the panel
+#'
+#' @return a plot with the legend inside a defined limits
+#' @export
+#'
+#' @examples add_legend(plot_wbreaks=density_wmap,legxy=c(0.11, 0.21))
+add_legend<-function(plot_wbreaks=plot_wbreaks,
+                     legxy=legxy){
+
+  plot_wlegend<-plot_wbreaks+
+    ggplot2::theme(
+      legend.position = legxy,
+      legend.title = ggplot2::element_blank(),
+      legend.text= ggplot2::element_text(size=10,color="#343a40",family='sans'),
+      legend.spacing.y =  ggplot2::unit(0.01, 'cm'),
+      legend.spacing.x =  ggplot2::unit(0.2, 'cm'),
+
+      legend.background = ggplot2::element_rect(fill='transparent',colour ="transparent"),
+      legend.box.background = ggplot2::element_rect(fill='transparent',colour ="transparent"),
+      legend.key = ggplot2::element_rect(fill = "transparent", colour = "transparent"),
+
+      #size
+      legend.key.size =  ggplot2::unit(0.7, 'cm')
+    )
+
+  return(plot_wlegend)
+}
+
+
+```
+
+A function to add the legend inside the plot
+```{r, eval=FALSE,echo=FALSE}
+add_legend<-function(plot_wbreaks=plot_wbreaks,
+                     legxy=legxy){
+
+  plot_wlegend<-plot_wbreaks+
+    ggplot2::theme(
+      legend.position = legxy,
+      legend.title = ggplot2::element_blank(),
+      legend.text= ggplot2::element_text(size=10,color="#343a40",family='sans'),
+      legend.spacing.y =  ggplot2::unit(0.01, 'cm'),
+      legend.spacing.x =  ggplot2::unit(0.2, 'cm'),
+
+      legend.background = ggplot2::element_rect(fill='transparent',colour ="transparent"),
+      legend.box.background = ggplot2::element_rect(fill='transparent',colour ="transparent"),
+      legend.key = ggplot2::element_rect(fill = "transparent", colour = "transparent"),
+
+      #size
+      legend.key.size =  ggplot2::unit(0.7, 'cm')
+    )
+
+  return(plot_wlegend)
+}
+```
+
+```{r}
+density_wlegend<-add_legend(
+  plot_wbreaks=density_wmap,
+  legxy=c(0.11, 0.21))
+```
+
+```{r, message=FALSE, warning=FALSE}
+density_wlegend<-density_wlegend+
+  theme(legend.key.size = ggplot2::unit(0.4, "cm"))+
+  ggplot2::annotate(geom="text",
+                      x=3.0, y=54.0,
+                      label=expression(atop("Density"), paste("[ind/k", m^2,"]")),
+                      color="#343a40",hjust = 0)
+density_wlegend
+```
+
+### add_theme
+
+```{r, eval=FALSE, echo=FALSE}
+add_theme<-function(plot_wlegend=plot_wlegend){
+
+  plot_wtheme<-plot_wlegend+
+    ggplot2::xlab('Longitude')+
+    ggplot2::ylab('Latitude')+
+    
+    # theme
+    ggplot2::theme(
+
+      #panel
+      panel.border = ggplot2::element_rect(colour = "black", fill=NA, size=1),
+      panel.grid.major = ggplot2::element_blank(),
+      panel.grid.minor = ggplot2::element_blank(),
+      panel.background = ggplot2::element_blank())
+
+  return(plot_wtheme)
+}
+```
+
+```{r, message=FALSE, warning=FALSE}
+density_wtheme<-add_theme(plot_wlegend = density_wlegend)
+density_wtheme
+```
+
+
+# Grid
+
+Base data
+
+```{r}
+my_CRS<-3035
+Europa<-sf::st_transform(GermanNorthSea::German_land, my_CRS)
+EEZ<-sf::st_transform(GermanNorthSea::German_EEZ, my_CRS)
+color_land='#f7bf54'
+color_water='#3668b4'
+xval<-c(3910000,4250000)
+yval<-c(3380000,3680000)
+```
+
+Provide density grid and mean densities
+
+```{r}
+density_plot<-ggplot2::ggplot()+
+    # maps
+    ggplot2::geom_sf(data = EEZ, colour = 'black', fill = color_water)+
+    ggplot2::geom_sf(data = Europa, colour = 'black', fill = color_land)+
+    ggplot2::geom_sf(data = density_grid,
+                     mapping = ggplot2::aes(fill = mean_density), lwd = 0, colour = NA) + 
+  ggplot2::coord_sf(xlim = xval, ylim = yval)+
+
+    NULL
+density_plot
+```
+
+
+## add_breaks
+
+A function to add color palette and breaks in the legend, will vary with the species density estimates
+
+```{r}
+add_breaks<-function(density_plot=density_plot,
+                     legendbreaks=legendbreaks,
+                     legendlimits=legendlimits,
+                     legendlabels=legendlabels){
+
+  plot_wbreaks<-density_plot+
+    ggplot2::scale_fill_gradientn(
+
+      colours = c("#f1faee", #0 white
+                  "#4ea8de", #0.10 lightblue
+                  '#1e6091', #0.20 darkblue
+                  "#34a0a4", #0.30 darkgreen
+                  '#76c893', #0.40 lightgreen
+                  '#d9ed92', #0.50 darkyellow
+                  "#ffea00", #0.60 bringyellow
+                  "#f1ba0a", #0.70 organge
+                  '#ff4800', #0.80 darkorgance
+                  "#e01e37", #0.90 lightred
+                  '#6e1423'  #1.0 darkred
+      ),
+      #the values are according to the size of the scale (100%), not values of the column
+      values = c(0, 0.10,0.20,0.30,0.40,0.50,0.60,0.70,0.80,0.90,1.0),
+
+      limits=legendlimits,
+      breaks=legendbreaks,
+      labels=legendlabels)+
+    ggplot2::guides(fill = ggplot2::guide_colourbar(ticks = FALSE))
+  return(plot_wbreaks)
+}
+```
+
+```{r, eval=TRUE}
+plot_wbreaks<-add_breaks(density_plot=density_plot,
+                     legendbreaks=c(0,0.5,1,1.5,2.0),
+                     legendlimits=c(0,2),
+                     legendlabels=c('     0','   0.5','   1.0','   1.5','> 2.0'))
+plot_wbreaks
+```
+
+
+
+## add_legend
+
+A function to add the legend inside the plot
+
+```{r}
+plot_wlegend<-add_legend(
+  plot_wbreaks=plot_wbreaks,
+  legxy=c(0.11, 0.21))
+```
+
+```{r, message=FALSE, warning=FALSE}
+plot_wlegend<-plot_wlegend+
+  ggplot2::theme(legend.key.size =  ggplot2::unit(0.7, 'cm'))+
+  ggplot2::annotate(geom="text",
+                      x=3905000, y=3510000,
+                      label=expression(atop("Density"), paste("[ind/k", m^2,"]")),
+                      color="#343a40",hjust = 0)
+plot_wlegend
+```
+
+
+##  add_theme
+
+A function to define the theme
+
+```{r, eval=FALSE, echo=FALSE}
+add_theme<-function(plot_wlegend=plot_wlegend){
+
+  plot_wtheme<-plot_wlegend+
+    ggplot2::xlab('Longitude')+
+    ggplot2::ylab('Latitude')+
+    ggplot2::scale_x_continuous(labels = function(x) paste0(x, '\u00B0', "W")) +
+    ggplot2::scale_y_continuous(labels = function(x) paste0(x, '\u00B0', "N"))+
+
+    # theme
+    ggplot2::theme(
+
+      #panel
+      panel.border = ggplot2::element_rect(colour = "black", fill=NA, size=1),
+      panel.grid.major = ggplot2::element_blank(),
+      panel.grid.minor = ggplot2::element_blank(),
+      panel.background = ggplot2::element_blank())
+
+  return(plot_wtheme)
+}
+```
+
+```{r, message=FALSE, warning=FALSE}
+plot_wtheme<-add_theme(plot_wlegend = plot_wlegend)
+plot_wtheme
+```
+
+
+
+
+
+
+
