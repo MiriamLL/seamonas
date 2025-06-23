@@ -16,16 +16,16 @@ database](https://helcom.fi/wp-content/uploads/2021/11/HELCOM-Monitoring-guideli
 
 **seamonas** contains:
 
-- A list of **549** species across **9** morphological separated groups.
-- Harmonized **column names** and provided detailed guidance for
-  completing each entry.
-- Unified **descriptions** for Observations including abiotic
+- A **list of 549 species** across morphological separated groups.
+- Harmonized **column names** and guidance for completing each entry.
+- Unified **descriptions** for field entries, includes abiotic
   structures, activity codes, associations.
-- **one** trip example from a monitoring containing basic trip
+- One **trip example** from a monitoring containing basic trip
   information.  
-- **one** survey example from a monitoring containing survey
+- One **survey example** from a monitoring containing survey
   information.
-- **one** survey example from a monitoring containing species detected.
+- One survey example from a monitoring containing **species detected and
+  specifications**.
 
 ## Installation
 
@@ -47,8 +47,7 @@ library(seamonas)
 ## Euring
 
 `seamonas` contains:  
-- A list of **549** species names across **9** morphological separated
-groups.
+- A list of **549** species names across morphological separated groups.
 
 ``` r
 head(Code_Euring)
@@ -79,8 +78,7 @@ head(Code_Euring)
 ## Explanations
 
 `seamonas` contains:  
-- Harmonized **column names** and provided detailed guidance for
-completing each entry.
+- Harmonized **column names** and guidance for completing each entry.
 
 ``` r
 data(Column_Descriptions)
@@ -95,13 +93,16 @@ library(tidyverse)
 ``` r
 seamonas::Column_Descriptions %>%
   select(starts_with('Trip'))%>%
-  drop_na()
+  drop_na()%>%
+  filter(Trip_Name=='DATE')
+#>   Trip_Name                Trip_Description
+#> 1      DATE Survey date in YYYYMMDD format.
 ```
 
 ## Descriptions
 
 `seamonas` contains:  
-- Unified **descriptions** for Observations including abiotic
+- Unified **descriptions** for field entries, includes abiotic
 structures, activity codes, associations.
 
 ``` r
@@ -132,7 +133,7 @@ seamonas::Code_Descriptions %>%
 ## Trip
 
 `seamonas` contains:  
-- **one** trip example from a monitoring containing basic trip
+- One **trip example** from a monitoring containing basic trip
 information.
 
 ``` r
@@ -141,12 +142,10 @@ data(Trip_test)
 
 **Field descriptions**:
 
-- `TRIP`: Can be left blank or used for descriptions of the columns.
-  <br>
+- `TRIP`: Used for descriptions of the columns. <br>
 - `TRIP_ID`: Sequential number of each survey day and any change in
   relevant fields. <br>
-- `Dataset_ID`: Numerical identifier of the dataset in the database.
-  Leave blank if unknown.<br>
+- `Dataset_ID`: Numerical identifier of the dataset in the database.<br>
 - `CRUISENO`: Unique code identifying the survey. <br>
 - `OWPAS`: Identifier for the contracting authority. <br>
 - `PROJECT`: Identifier for the project. <br>
@@ -206,10 +205,10 @@ seamonas::Trip_test %>%
 #> 1 CompanyName
 ```
 
-## Survey basis
+## Basis
 
 `seamonas` contains:  
-- **one** survey example from a monitoring containing survey
+- One **survey example** from a monitoring containing survey
 information.
 
 ``` r
@@ -218,62 +217,50 @@ data(Basis_test)
 
 **Field descriptions**:
 
-- `POSITIONS`: Can be left blank or used for descriptions of the
-  columns. <br>
+- `POSITIONS`: Can be used for descriptions of the columns. <br>
 - `POSITION_ID`: Unique numeric identifier used to link data between
-  “Basisdaten” and “Observations”. <br>
+  “Basis” and “Observations”. <br>
 - `POSITION_ID_CONTROLLED`: Numerical codes specifying if an image was
   controlled during screening. Includes values 1 to 3. Controlled during
   screening control (1), controlled during id control (2) and controlled
-  both during screening and id control (3). Leave blank if not
-  controlled. <br>
-- `Dataset_ID`: Numerical identifier of the dataset in the database.
-  Leave blank if unknown.<br>
+  both during screening and id control (3). <br>
+- `Dataset_ID`: Numerical identifier of the dataset in the database.<br>
 - `TRIP_ID`: Sequential number representing each survey day and any
-  change in relevant fields. This field is mandatory.<br>
-- `CRUISENO`: Unique identifier for the survey. This field is
-  mandatory.<br>
-- `CAMERA_NUMBER`: Identifier for the camera used. This field is
-  mandatory.<br>
+  change in relevant fields. <br>
+- `CRUISENO`: Unique identifier for the survey. <br>
+- `CAMERA_NUMBER`: Identifier for the camera used. <br>
 - `TRANSECT_NUMBER`: Sequential number representing transect number, if
   the survey was conducted along transects.<br>
-- `DATE`: Date of the survey in YYYYMMDD format. This field is
-  mandatory.<br>
-- `TIME`: Time of the image recording in hh:mm:ss format. This field is
-  mandatory.<br>
+- `DATE`: Date of the survey in YYYYMMDD format. <br>
+- `TIME`: Time of the image recording in hh:mm:ss format. <br>
 - `LAT_PIC_CENTER`: Latitude of the image center, recorded in WGS 84
-  decimal degrees (six decimal places). This field is mandatory.<br>
+  decimal degrees (six decimal places). <br>
 - `LON_PIC_CENTER`: Longitude of the image center, recorded in WGS 84
-  decimal degrees (six decimal places). This field is mandatory.<br>
+  decimal degrees (six decimal places). <br>
 - `PLANE_FLIGHT_HEIGHT`: Recorded flight height of the aircraft at the
-  time of image capture (in meters, ±10 m accuracy). Some variation is
-  expected. This field is mandatory.<br>
+  time of image capture (in meters, ±10 m accuracy). <br>
 - `PIC_AREA_ANALYSED`: Surface area of the image. Some variation is
-  expected. This field is mandatory.<br>
+  expected.<br>
 - `GLARE`: Numerical codes specifying sun glare intensity on the image,
   recorded at regular intervals Values expected are 0 = No glare; 1 =
-  Low glare; 2 = Medium glare; 3 = Strong glare. Some variation is
-  expected. This field is mandatory.<br>
+  Low glare; 2 = Medium glare; 3 = Strong glare. <br>
 - `SEASTATE`: Numerical codes specifying sea state on the image,
-  recorded at regular intervals. Values expected are 0 to 7. Some
-  variation is expected. This field is mandatory.<br>
+  recorded at regular intervals. Values expected are 0 to 7. <br>
 - `TURBIDITY`: Numerical codes specifying water turbidity level based on
   visibility into the water, recorded at regular intervals. Values
   expected are 1 = No turbidity, 2 = Medium turbidity, 3 = Strong
-  turbidity. Some variation is expected. This field is mandatory.<br>
+  turbidity. <br>
 - `ICE`: Numerical codes specifying ice coverage, recorded at regular
-  intervals. Usually 0 = No Ice. This field is mandatory.<br>
+  intervals.<br>
 - `CLARITY`: Numerical codes specifying air clarity, recorded at regular
   intervals. Values expected are 0 = not recorded, 1 = Low clarity, 2 =
-  Medium clarity, 3 = High clarity. Some variation is expected. This
-  field is mandatory.<br>
+  Medium clarity, 3 = High clarity. Some variation is expected. <br>
 - `PIC_QUALITY`: Numerical codes specifying quality of the image,
   recorded at regular intervals. Values expected are 1 = Good quality, 2
-  = Bad quality. Some variation is expected. This field is
-  mandatory.<br>
-- `PIC_FILENAME`: File name structure prefered:
-  Area_Date_PositionID_Code_Species_Camera_Modification.png. Example:
-  A_20250616_ID30_6340_Common_Guillemot_c1_m1. <br>
+  = Bad quality. <br>
+- `PIC_FILENAME`: File name that allows to link information with image.
+  Example: A_20250616_ID30_6340_Common_Guillemot_c1_m1.png
+  (Area_Date_PositionID_Code_Species_Camera_Modification). <br>
 - `NOTES`: Additional information not covered in previous fields.<br>
 
 ### Example of use
@@ -288,7 +275,8 @@ seamonas::Basis_test %>%
 ## Observations
 
 `seamonas` contains:  
-- **one** survey example from a monitoring containing species detected.
+- One survey example from a monitoring containing **species detected and
+specifications**.
 
 ``` r
 data(Observations_test)
@@ -296,13 +284,11 @@ data(Observations_test)
 
 **Field descriptions**:
 
-- `OBSERVATIONS`: Can be left blank or used for descriptions of the
-  columns.<br>
+- `OBSERVATIONS`: Can be used for descriptions of the columns.<br>
 - `Observation_ID`: Sequential number of each observation.<br>
 - `POSITION_ID`: Unique numeric identifier used to link data between
-  “Basisdaten” and “Observations”. <br>
-- `Dataset_ID`: Numerical identifier of the dataset in the database.
-  Leave blank if unknown.<br>
+  “Basis” and “Observations”. <br>
+- `Dataset_ID`: Numerical identifier of the dataset in the database.<br>
 - `CRUISENO`: Unique identifier for the survey. <br>
 - `ABIOTIC_STRUCTURES`: Numerical codes specifying physical abiotic
   features. Includes ships and infrastructures such as wind farms.<br>
@@ -310,35 +296,30 @@ data(Observations_test)
   observations. Includes garbage, fishing lines, or any floating objects
   that are not animals (e.g., seaweed).<br>
 - `OBSERVATION`: Numerical codes specifying the Euring code for every
-  animal observation. Leave blank if the entry corresponds to
-  ABIOTIC_STRUCTURES or ABIOTIC_OBSERVATIONS. <br>
+  animal observation. <br>
 - `ENGLISH_NAME_BEFORE_CONTROL`: English name assigned during initial
-  identification. Should be a text field. <br>
+  identification. <br>
 - `ENGLISH_NAME_CONTROL_ID`: English name assigned during identification
-  audit. Should be a text field. Leave blank if the observation was not
-  audited.<br>
+  audit. <br>
 - `ID_MATCH_MISMATCH`: Numerical codes specifying identification
   consistency between initial identifier and auditor: match (1) or
-  mismatch (2). Leave blank if not audited. <br>
+  mismatch (2).<br>
 - `ENGLISH_NAME`: English name assigned by the referee, corresponding to
-  the Euring code. Leave blank if the entry corresponds to
-  ABIOTIC_STRUCTURES or ABIOTIC_OBSERVATIONS. <br>
+  the Euring code.<br>
 - `DETECTION_STEP`: Numerical codes specifying the detection stage:
   initial screening (1), control screening (2), both initial and control
-  screening (3), initial identification, (4) audited identification (5).
-  Leave blank if the position was not audited.<br>
+  screening (3), initial identification, (4) audited identification
+  (5).<br>
 - `BEHAVIOUR`: Numerical codes specifying animal behavior, e.g., holding
   fish, dipping, kleptoparasitizing.<br>
 - `ACTIVITY`: Numerical codes specifying animal activity, such as:
   swimming (1), flying (2), submerged (3), breaching surface (4),
   associated with platform (5).<br>
 - `GROUP`: Consecutively numbered groups; all members of a group share
-  the same number. Leave blank if the animal doesn’t belong to a
-  group.<br>
+  the same number.<br>
 - `FAMILY_GROUP`: Groups consisting of adults and juveniles sharing the
   same number. Examples: Harbour porpoise with calf, Common guillemots
-  with fledglings. eave blank if the animal doesnt belong to a family
-  group.<br>
+  with fledglings.<br>
 - `ASSOCIATIONS`: Numerical codes specifying animal associations with
   other animals or abiotic structures. Examples include Multi-species
   feeding associations (MSFA).<br>
@@ -367,11 +348,9 @@ data(Observations_test)
   estimation of height of flight in flying birds. Categories include
   Parallax method (1), or calculated based on body size (2).<br>
 - `LAT_OBJECT`: Latitude of the observation in exact coordinates
-  recorded in WGS 84 format with six decimal places. Should not be left
-  blank.<br>
+  recorded in WGS 84 format with six decimal places. <br>
 - `LON_OBJECT`: Longitude of the observation in exact coordinates
-  recorded in WGS 84 format with six decimal places.Should not be left
-  blank.<br>
+  recorded in WGS 84 format with six decimal places.<br>
 - `NOTES`: Additional information not covered in previous fields.<br>
 
 ### Example of use
