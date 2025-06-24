@@ -229,7 +229,7 @@ data(Observations_test)
 - `ENGLISH_NAME`: English name assigned by the referee, corresponding to the Euring code.<br> 
 - `DETECTION_STEP`: Numerical codes specifying the detection stage: initial screening (1), control screening (2), both initial and control screening (3), initial identification, (4) audited identification (5).<br>
 - `BEHAVIOUR`: Numerical codes specifying animal behavior, e.g., holding fish, dipping, kleptoparasitizing.<br>
-- `ACTIVITY`: Numerical codes specifying animal activity, such as: swimming (1), flying (2), submerged (3), breaching surface (4), associated with platform (5).<br>
+- `ACTIVITY`: Numerical codes specifying animal activity, such as: swimming (1), flying (2), submerged (3), breaching surface (4), associated with platform (5). For abiotic observations and astructures undeclared (0) can be used. <br>
 - `GROUP`: Consecutively numbered groups; all members of a group share the same number.<br>
 - `FAMILY_GROUP`: Groups consisting of adults and juveniles sharing the same number. Examples: Harbour porpoise with calf, Common guillemots with fledglings.<br>
 - `ASSOCIATIONS`: Numerical codes specifying animal associations with other animals or abiotic structures. Examples include Multi-species feeding associations (MSFA).<br>

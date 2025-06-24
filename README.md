@@ -314,7 +314,8 @@ data(Observations_test)
   fish, dipping, kleptoparasitizing.<br>
 - `ACTIVITY`: Numerical codes specifying animal activity, such as:
   swimming (1), flying (2), submerged (3), breaching surface (4),
-  associated with platform (5).<br>
+  associated with platform (5). For abiotic observations and astructures
+  undeclared (0) can be used. <br>
 - `GROUP`: Consecutively numbered groups; all members of a group share
   the same number.<br>
 - `FAMILY_GROUP`: Groups consisting of adults and juveniles sharing the
@@ -363,11 +364,11 @@ seamonas::Observations_test %>%
   arrange(desc(n))%>%
   head(3)
 #> # A tibble: 3 × 2
-#>   ENGLISH_NAME                n
-#>   <chr>                   <int>
-#> 1 Common Tern/Arctic Tern    58
-#> 2 unidentified small gull    53
-#> 3 Common Guillemot           48
+#>   ENGLISH_NAME                 n
+#>   <chr>                    <int>
+#> 1 Common Gull                 73
+#> 2 Lesser Black-backed Gull    72
+#> 3 unidentified small gull     72
 ```
 
 ## Citation
