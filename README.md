@@ -20,12 +20,12 @@ database](https://helcom.fi/wp-content/uploads/2021/11/HELCOM-Monitoring-guideli
 - Harmonized **column names** and guidance for completing each entry.
 - Unified **descriptions** for field entries, includes abiotic
   structures, activity codes, associations.
-- One **trip example** from a monitoring containing basic trip
+- One trip example from a fictional monitoring containing basic **trip**
   information.  
-- One **survey example** from a monitoring containing survey
+- One survey example from a fictional monitoring containing **survey**
   information.
-- One survey example from a monitoring containing **species detected and
-  specifications**.
+- One survey example from a fictional monitoring containing **species
+  detected and specifications**.
 
 ## Installation
 
@@ -133,7 +133,7 @@ seamonas::Code_Descriptions %>%
 ## Trip
 
 `seamonas` contains:  
-- One **trip example** from a monitoring containing basic trip
+- One trip example from a fictional monitoring containing basic **trip**
 information.
 
 ``` r
@@ -208,7 +208,7 @@ seamonas::Trip_test %>%
 ## Basis
 
 `seamonas` contains:  
-- One **survey example** from a monitoring containing survey
+- One survey example from a fictional monitoring containing **survey**
 information.
 
 ``` r
@@ -275,8 +275,8 @@ seamonas::Basis_test %>%
 ## Observations
 
 `seamonas` contains:  
-- One survey example from a monitoring containing **species detected and
-specifications**.
+- One survey example from a fictional monitoring containing **species
+detected and specifications**.
 
 ``` r
 data(Observations_test)
@@ -381,6 +381,11 @@ monitoring seabirds at sea. <https://github.com/MiriamLL/seamonas>
 
 Additional references:
 
-Kotzerka, J., Markones, N., Dierschke, V., & Auniņš, A. (2021).
-Guidelines for monitoring seabirds at sea. In Helsinki Commission.
-<https://helcom.fi/wp-content/uploads/2021/11/HELCOM-Monitoring-guidelines-for-seabirds-at-sea-monitoring.pdf>
+- Kotzerka, J., Markones, N., Dierschke, V., & Auniņš, A. (2021).
+  Guidelines for monitoring seabirds at sea. In Helsinki Commission.
+  <https://helcom.fi/wp-content/uploads/2021/11/HELCOM-Monitoring-guidelines-for-seabirds-at-sea-monitoring.pdf>
+
+- ESAS data model. <https://esas-docs.ices.dk/>
+
+- ICES data portal.
+  <https://www.ices.dk/data/data-portals/Pages/European-Seabirds-at-sea.aspx>
