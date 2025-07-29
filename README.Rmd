@@ -263,7 +263,7 @@ seamonas::Observations_test %>%
 
 If you use **seamonas** for your research, please consider citing this package. 
 
-Lerma M (2025). Package seamonas. Access guidelines information for monitoring seabirds at sea. https://github.com/MiriamLL/seamonas
+Lerma M, Schwemmer, J (2025). Package seamonas. Access guidelines information for monitoring seabirds at sea. https://github.com/MiriamLL/seamonas
 
 Additional references:
 
