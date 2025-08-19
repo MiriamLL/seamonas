@@ -146,59 +146,80 @@ data(Trip_test)
 
 **Field descriptions**:
 
-- `TRIP`: Used for descriptions of the columns. <br>
+- `TRIP`: Used for descriptions of the columns. Data type:
+  character/text/string (40 characters).<br>
 - `TRIP_ID`: Sequential number of each survey day and any change in
-  relevant fields. <br>
-- `Dataset_ID`: Numerical identifier of the dataset in the database.<br>
-- `CRUISENO`: Unique code identifying the survey. <br>
-- `OWPAS`: Identifier for the contracting authority. <br>
-- `PROJECT`: Identifier for the project. <br>
-- `CLUSTER`: Identifier for the cluster or study area. <br>
-- `LAB`: Name of the company conducting the survey. <br>
+  relevant fields. Data type: numeric (2 characters).<br>
+- `Dataset_ID`: Numerical identifier of the dataset in the database.
+  Data type: numeric (20 characters).<br>
+- `CRUISENO`: Unique code identifying the survey. Data type:
+  character/text/string (40 characters). <br>
+- `OWPAS`: Identifier for the contracting authority. Data type:
+  character/text/string (40 characters). <br>
+- `PROJECT`: Identifier for the project. Data type:
+  character/text/string (40 characters). <br>
+- `CLUSTER`: Identifier for the cluster or study area. Data type:
+  character/text/string (40 characters). <br>
+- `LAB`: Name of the company conducting the survey. Data type:
+  character/text/string (40 characters).<br>
 - `SCIENTIST`: Name of the responsible scientist at the surveying
-  company. <br>
-- `DATATYPE`: Type of data collected (e.g., Seabird Monitoring). <br>
+  company. Data type: character/text/string (60 characters). <br>
+- `DATATYPE`: Type of data collected (e.g., Seabird Monitoring). Data
+  type: character/text/string (60 characters). <br>
 - `TECHNIQUE`: Survey method used (e.g., video or still camera for
-  digital surveys). <br>
-- `OBSERVER`: Identifier of the surveyor or aircraft operator. <br>
-- `PLANE`: Identifier of the aircraft used. <br>
-- `NUMBER_OF_PLANES`: Number of planes used in the survey. <br>
+  digital surveys). Data type: character/text/string (60 characters).
+  <br>
+- `OBSERVER`: Identifier of the surveyor or aircraft operator. Data
+  type: character/text/string (40 characters).<br>
+- `PLANE`: Identifier of the aircraft used. Data type:
+  character/text/string (40 characters). <br>
+- `NUMBER_OF_PLANES`: Number of planes used in the survey. Data type:
+  numeric (2 characters).<br>
 - `DOUBLE_PLATFORM`: Define if survey include parallel flights (‘Yes’or
-  ’No’). <br>
-- `DATE`: Survey date in YYYYMMDD format.<br>
-- `STARTTIME`: Time of start of survey in hh:mm:ss format.<br>
-- `STARTTIME`: Time of the end of the survey in hh:mm:ss format.<br>
-- `CAMERA_SYSTEM`: Description of the camera system used. <br>
-- `RESOLUTION`: Numerical value of the resolution at sea surface.<br>
+  ’No’). Data type: character/text/string (40 characters).<br>
+- `DATE`: Survey date in YYYYMMDD format or text (8 characters).<br>
+- `STARTTIME`: Time of start of survey in hh:mm:ss format. Data type:
+  time (hh:mm:ss) or text (8 characters).<br>
+- `STARTTIME`: Time of the end of the survey in hh:mm:ss format. Data
+  type: time (hh:mm:ss) or text (8 characters). <br>
+- `CAMERA_SYSTEM`: Description of the camera system used. Data type:
+  character/text/string (40 characters). <br>
+- `RESOLUTION`: Numerical value of the resolution at sea surface. Data
+  type: numeric (2 characters). <br>
 - `PLANE_FLIGHT_HEIGHT_PLANNED`: Numerical value of planned flight
-  altitude. <br>
-- `STRIP_WIDHT`: Numerical value of the width of the survey strip. <br>
+  altitude. Data type: numeric (4 characters).<br>
+- `STRIP_WIDHT`: Numerical value of the width of the survey strip. Data
+  type: numeric (3 characters). <br>
 - `PLANE_SPEED`: Numerical value for speed of the aircraft during the
-  survey . <br>
+  survey. Data type: numeric (3 characters). <br>
 - `POSITION_ACCURACY`: Mean deviation between recorded image position
-  and actual GPS position. <br>
+  and actual GPS position. Data type: numeric (2 characters).. <br>
 - `METHOD_ID`: Numerical value to define if the survey was made by 1=
-  Transect or 2 = Grid. <br>
+  Transect or 2 = Grid. Data type: numeric (1 character). <br>
 - `AREA_OBSERVED`: Numerical value of the area observed before
-  processing the images. <br>
+  processing the images. Data type: numeric (6 decimals). <br>
 - `AREA_ANALYSED`: Numerical value of the area analysed after processing
-  the images. <br>
+  the images. Data type: numeric (6 decimals).<br>
 - `AREA_CONTROLLED`: Numerical value of the area that was controlled
-  during the screening. <br>
+  during the screening. Data type: numeric (3 decimals). <br>
 - `ID_CONTROLLED`: Numerical value of the total number of controlled
-  objects. <br>
+  objects. Data type: numeric (1 decimals). <br>
 - `SCREENING_CONTROL_DIFFERENCE`: Percentage of the difference between
-  screening and control. <br>
+  screening and control. Data type: numeric (3 decimals). <br>
 - `ID_CONTROL_DIFFERENCE`: Percentage of the difference between initial
-  identification and audit. <br>
+  identification and audit. Data type: numeric (3 decimals). <br>
 - `QUALITY_IMPROVEMENT`: Description of any quality improvement actions
-  taken. <br>
-- `POSITIONSYSTEM`: Specification of the positioning system used. <br>
+  taken. Data type: character/text/string (250 characters). <br>
+- `POSITIONSYSTEM`: Specification of the positioning system used. Data
+  type: character/text/string (20 characters).<br>
 - `POSIT_PRECISION_CODE`: Positional accuracy: 1 = decimal degree with 1
   decimal place, 2 = decimal degree with 2 decimal places, 3 = decimal
-  degree with 3 decimal places, and so on. <br>
-- `REFSYSTEM`: Geodetic reference system used. <br>
-- `NOTES`: Additional information not covered in previous fields.<br>
+  degree with 3 decimal places, and so on. Data type: numerical (1
+  character). <br>
+- `REFSYSTEM`: Geodetic reference system used. Data type:
+  character/text/string (20 characters). <br>
+- `NOTES`: Additional information not covered in previous fields. Data
+  type: character/text/string (250 characters).<br>
 
 ### Example of use
 
@@ -221,51 +242,67 @@ data(Basis_test)
 
 **Field descriptions**:
 
-- `POSITIONS`: Can be used for descriptions of the columns. <br>
+- `POSITIONS`: Can be used for descriptions of the columns. Data type:
+  character/text/string (40 characters). <br>
 - `POSITION_ID`: Unique numeric identifier used to link data between
-  “Basis” and “Observations”. <br>
+  “Basis” and “Observations”. Should contain the Area, Date and Time.
+  Example (A120251908123200). Data type: character/text/string (40
+  characters). <br>
 - `POSITION_ID_CONTROLLED`: Numerical codes specifying if an image was
   controlled during screening. Includes values 1 to 3. Controlled during
   screening control (1), controlled during id control (2) and controlled
-  both during screening and id control (3). <br>
-- `Dataset_ID`: Numerical identifier of the dataset in the database.<br>
+  both during screening and id control (3). Data type: numeric (1
+  character). <br>
+- `Dataset_ID`: Numerical identifier of the dataset in the database.
+  Data type: character/text/string (40 characters). <br>
 - `TRIP_ID`: Sequential number representing each survey day and any
-  change in relevant fields. <br>
-- `CRUISENO`: Unique identifier for the survey. <br>
-- `CAMERA_NUMBER`: Identifier for the camera used. <br>
+  change in relevant fields. Data type: numeric (2 characters). <br>
+- `CRUISENO`: Unique identifier for the survey. Data type:
+  character/text/string (40 characters).<br>
+- `CAMERA_NUMBER`: Identifier for the camera used. Data type: numeric (1
+  character). <br>
 - `TRANSECT_NUMBER`: Sequential number representing transect number, if
-  the survey was conducted along transects.<br>
-- `DATE`: Date of the survey in YYYYMMDD format. <br>
-- `TIME`: Time of the image recording in hh:mm:ss format. <br>
+  the survey was conducted along transects. Data type: numeric (3
+  characters).<br>
+- `DATE`: Date of the survey in YYYYMMDD format. Data type: date
+  (YYYYMMDD) or text (8 characters). <br>
+- `TIME`: Time of the image recording in hh:mm:ss format. Data type:
+  time (hh:mm:ss) or text (8 characters) <br>
 - `LAT_PIC_CENTER`: Latitude of the image center, recorded in WGS 84
-  decimal degrees (six decimal places). <br>
+  decimal degrees. Data type: numeric (6 decimals).<br>
 - `LON_PIC_CENTER`: Longitude of the image center, recorded in WGS 84
-  decimal degrees (six decimal places). <br>
+  decimal degrees. Data type: numeric (6 decimals).<br>
 - `PLANE_FLIGHT_HEIGHT`: Recorded flight height of the aircraft at the
-  time of image capture (in meters, ±10 m accuracy). <br>
+  time of image capture (in meters, ±10 m accuracy). Data type: numeric
+  (4 characters).<br>
 - `PIC_AREA_ANALYSED`: Surface area of the image. Some variation is
-  expected.<br>
+  expected. Data type: numeric (6 decimals).<br>
 - `GLARE`: Numerical codes specifying sun glare intensity on the image,
   recorded at regular intervals Values expected are 0 = No glare; 1 =
-  Low glare; 2 = Medium glare; 3 = Strong glare. <br>
+  Low glare; 2 = Medium glare; 3 = Strong glare. Data type: numeric (1
+  character). <br>
 - `SEASTATE`: Numerical codes specifying sea state on the image,
-  recorded at regular intervals. Values expected are 0 to 7. <br>
+  recorded at regular intervals. Values expected are 0 to 7. Data type:
+  numeric (1 character). <br>
 - `TURBIDITY`: Numerical codes specifying water turbidity level based on
   visibility into the water, recorded at regular intervals. Values
   expected are 1 = No turbidity, 2 = Medium turbidity, 3 = Strong
-  turbidity. <br>
+  turbidity. Data type: numeric (1 character).<br>
 - `ICE`: Numerical codes specifying ice coverage, recorded at regular
-  intervals.<br>
+  intervals. Data type: numeric (1 character).<br>
 - `CLARITY`: Numerical codes specifying air clarity, recorded at regular
   intervals. Values expected are 0 = not recorded, 1 = Low clarity, 2 =
-  Medium clarity, 3 = High clarity. Some variation is expected. <br>
+  Medium clarity, 3 = High clarity. Some variation is expected. Data
+  type: numeric (1 character). <br>
 - `PIC_QUALITY`: Numerical codes specifying quality of the image,
   recorded at regular intervals. Values expected are 1 = Good quality, 2
-  = Bad quality. <br>
+  = Bad quality. Data type: numeric (1 character).<br>
 - `PIC_FILENAME`: File name that allows to link information with image.
-  Example: A_20250616_ID30_SPECIES6340_c1_m1.png
-  (Area_Date_PositionID_Code_Camera_Modification). <br>
-- `NOTES`: Additional information not covered in previous fields.<br>
+  Information should include: Area, Date, Position, Species code, Camera
+  number and Edition. Example: E_20230213_ID1489_SPECIES5909_c1_m2. Data
+  type: character/text/string (60 characters). <br>
+- `NOTES`: Additional information not covered in previous fields. Data
+  type: character/text/string (250 characters).<br>
 
 ### Example of use
 
@@ -288,75 +325,89 @@ data(Observations_test)
 
 **Field descriptions**:
 
-- `OBSERVATIONS`: Can be used for descriptions of the columns.<br>
-- `Observation_ID`: Sequential number of each observation.<br>
+- `OBSERVATIONS`: Can be used for descriptions of the columns. Data
+  type: character/text/string (40 characters). <br>
+- `Observation_ID`: Sequential number of each observation. Data type:
+  numeric (10 characters).<br>
 - `POSITION_ID`: Unique numeric identifier used to link data between
-  “Basis” and “Observations”. <br>
-- `Dataset_ID`: Numerical identifier of the dataset in the database.<br>
-- `CRUISENO`: Unique identifier for the survey. <br>
+  “Basis” and “Observations”. Should contain the Area, Date and Time.
+  Example (A120251908123200). Data type: character/text/string (40
+  characters). <br>
+- `Dataset_ID`: Numerical identifier of the dataset in the database.
+  Data type: character/text/string (40 characters).<br>
+- `CRUISENO`: Unique identifier for the survey. Data type:
+  character/text/string (40 characters). <br>
 - `ABIOTIC_STRUCTURES`: Numerical codes specifying physical abiotic
-  features. Includes ships and infrastructures such as wind farms.<br>
+  features. Includes ships and infrastructures such as wind farms. Data
+  type: numeric (4 characters). <br>
 - `ABIOTIC_OBSERVATIONS`: Numerical codes specifying abiotic non-living
   observations. Includes garbage, fishing lines, or any floating objects
-  that are not animals (e.g., seaweed).<br>
+  that are not animals (e.g., seaweed). Data type: numeric (4
+  characters).<br>
 - `OBSERVATION`: Numerical codes specifying the Euring code for every
-  animal observation. <br>
+  animal observation. Data type: numeric (5 characters). <br>
 - `ENGLISH_NAME_BEFORE_CONTROL`: English name assigned during initial
-  identification. <br>
+  identification. Data type: character/text/string (70 characters). <br>
 - `ENGLISH_NAME_CONTROL_ID`: English name assigned during identification
-  audit. <br>
+  audit. Data type: character/text/string (70 characters).<br>
 - `ID_MATCH_MISMATCH`: Numerical codes specifying identification
   consistency between initial identifier and auditor: match (1) or
-  mismatch (2).<br>
+  mismatch (2). Data type: numeric (1 character).<br>
 - `ENGLISH_NAME`: English name assigned by the referee, corresponding to
-  the Euring code.<br>
+  the Euring code. Data type: character/text/string (70 characters).<br>
 - `DETECTION_STEP`: Numerical codes specifying the detection stage:
   initial screening (1), control screening (2), both initial and control
-  screening (3), initial identification, (4) audited identification
-  (5).<br>
+  screening (3), initial identification, (4) audited identification (5).
+  Data type: numeric (1 character).<br>
 - `BEHAVIOUR`: Numerical codes specifying animal behavior, e.g., holding
-  fish, dipping, kleptoparasitizing.<br>
+  fish, dipping, kleptoparasiting. Data type: numeric (3
+  characters).<br>
 - `ACTIVITY`: Numerical codes specifying animal activity, such as:
   swimming (1), flying (2), submerged (3), breaching surface (4),
-  associated with platform (5). For abiotic observations and astructures
-  undeclared (0) can be used. <br>
+  associated with platform (5). For abiotic observations and estructures
+  undeclared (0) can be used. Data type: numeric (1 character).<br>
 - `GROUP`: Consecutively numbered groups; all members of a group share
-  the same number.<br>
+  the same number. Data type: numeric (4 characters).<br>
 - `FAMILY_GROUP`: Groups consisting of adults and juveniles sharing the
   same number. Examples: Harbour porpoise with calf, Common guillemots
-  with fledglings.<br>
+  with fledglings. Data type: numeric (4 characters).<br>
 - `ASSOCIATIONS`: Numerical codes specifying animal associations with
   other animals or abiotic structures. Examples include Multi-species
-  feeding associations (MSFA).<br>
+  feeding associations (MSFA). Data type: numeric (3 characters).<br>
 - `HEADING`: Absolute movement direction of the animal in numeric
-  compass bearings at 45° intervals (e.g., 0°, 45°, 90°, etc.).<br>
+  compass bearings at 45° intervals (e.g., 0°, 45°, 90°, etc.). Data
+  type: numeric (3 characters).<br>
 - `SUBMERGED`: Specification of the animal’s position relative to the
-  water surface: breaching (o), below the surface (u) or unclear
-  (x).<br>
+  water surface: breaching (o), below the surface (u) or unclear (x).
+  Data type: character/text/string (1 character).<br>
 - `AGE_CLASS`: Specification of the age category of the animal:
   adult (A) or immature (IM). May also include molting (x) or not
-  molting (y).<br>
-- `AGE_YEAR`: Numerical codes specifying the calendar year from 1 to
-  7.<br>
+  molting (y). Data type: character/text/string (2 characters).<br>
+- `AGE_YEAR`: Numerical codes specifying the calendar year from 1 to 7.
+  Data type: numeric.<br>
 - `PLUMAGE`: Specification of the plumage type includes breeding (B),
-  winter (W), and morphs.<br>
+  winter (W), and morphs. Data type: character/text/string (1
+  characters).<br>
 - `SEX`: Specification of the sex of the animal. Includes female (F) or
-  male (M).<br>
+  male (M). Data type: character/text/string (1 characters). <br>
 - `LENGTH`: Linear body length measured from the tip of the beak to the
-  tip of the tail in numerical.<br>
+  tip of the tail in numerical. Data type: numeric (4 characters).<br>
 - `WING_SPAN`: Measurement across the full spread of the wings in
-  numerical.<br>
-- `FLIGHT_HEIGHT`: Approximate height of flight in flying birds.<br>
+  numerical. Data type: numeric (4 characters).<br>
+- `FLIGHT_HEIGHT`: Approximate height of flight in flying birds. Data
+  type: numeric (3 decimals). <br>
 - `FLIGHT_HEIGHT_CONFIDENCE`: Confidence interval of height of flight in
-  flying birds.<br>
+  flying birds. Data type: numeric (3 decimals).<br>
 - `FLIGHT_HEIGHT_METHOD_ID`: Numerical codes specifying the method for
   estimation of height of flight in flying birds. Categories include
-  Parallax method (1), or calculated based on body size (2).<br>
+  Parallax method (1), or calculated based on body size (2). Data type:
+  numeric (1 character).<br>
 - `LAT_OBJECT`: Latitude of the observation in exact coordinates
-  recorded in WGS 84 format with six decimal places. <br>
+  recorded in WGS 84 format. Data type: numeric (6 decimals).<br>
 - `LON_OBJECT`: Longitude of the observation in exact coordinates
-  recorded in WGS 84 format with six decimal places.<br>
-- `NOTES`: Additional information not covered in previous fields.<br>
+  recorded in WGS 84 format. Data type: numeric (6 decimals).<br>
+- `NOTES`: Additional information not covered in previous fields. Data
+  type: character/text/string (250 characters).<br>
 
 ### Example of use
 
