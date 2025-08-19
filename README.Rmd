@@ -59,6 +59,10 @@ library(seamonas)
 head(Code_Euring)
 ```
 
+```{r}
+Code_Euring<-Code_Euring
+```
+
 **Key fields**: 
 
 - `Code`: Numerical code based on [Euring](https://euring.org/data-and-codes/euring-codes). The species codes are primarily based on the EURING list, with additional 'uncertainty codes' commonly used by ESAS partners to represent species groups that are often difficult to identify under at-sea field conditions.<br> 
@@ -195,7 +199,7 @@ data(Basis_test)
 - `ICE`: Numerical codes specifying ice coverage, recorded at regular intervals.<br>
 - `CLARITY`: Numerical codes specifying air clarity, recorded at regular intervals. Values expected are 0 = not recorded, 1 = Low clarity, 2 = Medium clarity, 3 = High clarity. Some variation is expected. <br>
 - `PIC_QUALITY`: Numerical codes specifying quality of the image, recorded at regular intervals. Values expected are 1 = Good quality, 2 = Bad quality. <br>
-- `PIC_FILENAME`: File name that allows to link information with image. Example: A_20250616_ID30_6340_Common_Guillemot_c1_m1.png (Area_Date_PositionID_Code_Species_Camera_Modification). <br>
+- `PIC_FILENAME`: File name that allows to link information with image. Example: A_20250616_ID30_SPECIES6340_c1_m1.png (Area_Date_PositionID_Code_Camera_Modification). <br>
 - `NOTES`: Additional information not covered in previous fields.<br>
 
 ### Example of use

@@ -60,6 +60,10 @@ head(Code_Euring)
 #> 6   60 Podilymbus podiceps    Pied-billed Grebe               Grebes
 ```
 
+``` r
+Code_Euring<-Code_Euring
+```
+
 **Key fields**:
 
 - `Code`: Numerical code based on
@@ -259,8 +263,8 @@ data(Basis_test)
   recorded at regular intervals. Values expected are 1 = Good quality, 2
   = Bad quality. <br>
 - `PIC_FILENAME`: File name that allows to link information with image.
-  Example: A_20250616_ID30_6340_Common_Guillemot_c1_m1.png
-  (Area_Date_PositionID_Code_Species_Camera_Modification). <br>
+  Example: A_20250616_ID30_SPECIES6340_c1_m1.png
+  (Area_Date_PositionID_Code_Camera_Modification). <br>
 - `NOTES`: Additional information not covered in previous fields.<br>
 
 ### Example of use
