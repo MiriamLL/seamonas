@@ -278,16 +278,16 @@ data(Basis_test)
 - `PIC_AREA_ANALYSED`: Surface area of the image. Some variation is
   expected. Data type: numeric (6 decimals).<br>
 - `GLARE`: Numerical codes specifying sun glare intensity on the image,
-  recorded at regular intervals Values expected are 0 = No glare; 1 =
+  recorded at regular intervals. Values expected are 0 = No glare; 1 =
   Low glare; 2 = Medium glare; 3 = Strong glare. Data type: numeric (1
   character). <br>
 - `SEASTATE`: Numerical codes specifying sea state on the image,
-  recorded at regular intervals. Values expected are 0 to 7. Data type:
+  recorded at regular intervals.  based on the Beaufort scale as follows: 0 for calm seas resembling a mirror, 1 for seas with ripples, 2 for small wavelets, 3 for the beginning of breaking crests, and 4 for small waves lengthening with numerous whitecaps. Values expected are 0 to 7. Data type:
   numeric (1 character). <br>
 - `TURBIDITY`: Numerical codes specifying water turbidity level based on
   visibility into the water, recorded at regular intervals. Values
-  expected are 1 = No turbidity, 2 = Medium turbidity, 3 = Strong
-  turbidity. Data type: numeric (1 character).<br>
+  expected are 1 = No turbidity, 2 = Medium turbidity that limited visibility under water, 3 = Strong
+  turbidity that had no visibility underwater. Data type: numeric (1 character).<br>
 - `ICE`: Numerical codes specifying ice coverage, recorded at regular
   intervals. Data type: numeric (1 character).<br>
 - `CLARITY`: Numerical codes specifying air clarity, recorded at regular
