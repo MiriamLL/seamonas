@@ -44,41 +44,6 @@ Load the package
 library(seamonas)
 ```
 
-## Euring
-
-`seamonas` contains:  
-- A list of **549** species names across morphological separated groups.
-
-``` r
-head(Code_Euring)
-#>   Code     Scientific_name         English_name Artificial_tax_class
-#> 1   20      Gavia stellata   Red-throated Diver               Divers
-#> 2   30       Gavia arctica Black-throated Diver               Divers
-#> 3   40         Gavia immer Great Northern Diver               Divers
-#> 4   50       Gavia adamsii   White-billed Diver               Divers
-#> 5   59         Gavia spec.   unidentified diver               Divers
-#> 6   60 Podilymbus podiceps    Pied-billed Grebe               Grebes
-```
-
-``` r
-Code_Euring<-Code_Euring
-```
-
-**Key fields**:
-
-- `Code`: Numerical code based on
-  [Euring](https://euring.org/data-and-codes/euring-codes). The species
-  codes are primarily based on the EURING list, with additional
-  ‘uncertainty codes’ commonly used by ESAS partners to represent
-  species groups that are often difficult to identify under at-sea field
-  conditions.<br>
-- `Scientific_name`: A scientific name is the standardized, universally
-  accepted name used to identify and classify living organisms. It
-  follows a system called binomial nomenclature.<br>
-- `English_name`: Official common name of the species.<br>
-- `Artificial_tax_class`: A custom classification system based on
-  taxonomic and morphological similarities among species.<br>
-
 ## Explanations
 
 `seamonas` contains:  
@@ -278,16 +243,16 @@ data(Basis_test)
 - `PIC_AREA_ANALYSED`: Surface area of the image. Some variation is
   expected. Data type: numeric (6 decimals).<br>
 - `GLARE`: Numerical codes specifying sun glare intensity on the image,
-  recorded at regular intervals. Values expected are 0 = No glare; 1 =
+  recorded at regular intervals Values expected are 0 = No glare; 1 =
   Low glare; 2 = Medium glare; 3 = Strong glare. Data type: numeric (1
   character). <br>
 - `SEASTATE`: Numerical codes specifying sea state on the image,
-  recorded at regular intervals.  based on the Beaufort scale as follows: 0 for calm seas resembling a mirror, 1 for seas with ripples, 2 for small wavelets, 3 for the beginning of breaking crests, and 4 for small waves lengthening with numerous whitecaps. Values expected are 0 to 7. Data type:
+  recorded at regular intervals. Values expected are 0 to 7. Data type:
   numeric (1 character). <br>
 - `TURBIDITY`: Numerical codes specifying water turbidity level based on
   visibility into the water, recorded at regular intervals. Values
-  expected are 1 = No turbidity, 2 = Medium turbidity that limited visibility under water, 3 = Strong
-  turbidity that had no visibility underwater. Data type: numeric (1 character).<br>
+  expected are 1 = No turbidity, 2 = Medium turbidity, 3 = Strong
+  turbidity. Data type: numeric (1 character).<br>
 - `ICE`: Numerical codes specifying ice coverage, recorded at regular
   intervals. Data type: numeric (1 character).<br>
 - `CLARITY`: Numerical codes specifying air clarity, recorded at regular
@@ -426,12 +391,63 @@ seamonas::Observations_test %>%
 #> 3 unidentified small gull     72
 ```
 
+## Euring
+
+`seamonas` contains:  
+- A list of **549** species names across morphological separated groups.
+
+``` r
+head(Code_Euring)
+#> # A tibble: 6 × 4
+#>   Code  Scientific_name     English_name         Groupping
+#>   <chr> <chr>               <chr>                <chr>    
+#> 1 20    Gavia stellata      Red-throated Diver   Divers   
+#> 2 30    Gavia arctica       Black-throated Diver Divers   
+#> 3 40    Gavia immer         Great Northern Diver Divers   
+#> 4 50    Gavia adamsii       White-billed Diver   Divers   
+#> 5 59    Gavia spec.         unidentified diver   Divers   
+#> 6 60    Podilymbus podiceps Pied-billed Grebe    Grebes
+```
+
+**Key fields**:
+
+- `Code`: Numerical code based on
+  [Euring](https://euring.org/data-and-codes/euring-codes). The species
+  codes are primarily based on the EURING list, with additional
+  ‘uncertainty codes’ commonly used by ESAS partners to represent
+  species groups that are often difficult to identify under at-sea field
+  conditions.<br>
+- `Scientific_name`: A scientific name is the standardized, universally
+  accepted name used to identify and classify living organisms. It
+  follows a system called binomial nomenclature.<br>
+- `English_name`: Official common name of the species. When the species
+  identification is between two different species, two common names are
+  allowed separated by a diagonal, without spaces.<br>
+- `Groupping`: A custom classification system based on taxonomic and
+  morphological similarities among species.<br>
+
+### Example of use
+
+``` r
+seamonas::Code_Euring %>%
+  filter(Groupping=='Divers')%>%
+  distinct()
+#> # A tibble: 5 × 4
+#>   Code  Scientific_name English_name         Groupping
+#>   <chr> <chr>           <chr>                <chr>    
+#> 1 20    Gavia stellata  Red-throated Diver   Divers   
+#> 2 30    Gavia arctica   Black-throated Diver Divers   
+#> 3 40    Gavia immer     Great Northern Diver Divers   
+#> 4 50    Gavia adamsii   White-billed Diver   Divers   
+#> 5 59    Gavia spec.     unidentified diver   Divers
+```
+
 ## Citation
 
 If you use **seamonas** for your research, please consider citing this
 package.
 
-Lerma M, Schwemmer, J (2025). Package seamonas. Access guidelines
+Lerma M, Schwemmer, H (2025). Package seamonas. Access guidelines
 information for monitoring seabirds at sea.
 <https://github.com/MiriamLL/seamonas>
 

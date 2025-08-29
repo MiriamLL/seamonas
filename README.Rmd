@@ -273,14 +273,22 @@ Code_Euring<-Code_Euring %>%
                              English_name == 'unidentified cormorant' ~ "Cormorants",
                              TRUE ~ Groupping
                              ))
-save(Code_Euring, file = "Code_Euring.rda", version = 2)
+
+
+# From June 2025: 6159 Artic/Common Tern
+# Old 6169
+Code_Euring<-Code_Euring %>%
+  mutate(Code=case_when(Code == '6159' ~ "6169",
+                             TRUE ~ Code
+                             ))
+
 ```
 
 **Key fields**: 
 
 - `Code`: Numerical code based on [Euring](https://euring.org/data-and-codes/euring-codes). The species codes are primarily based on the EURING list, with additional 'uncertainty codes' commonly used by ESAS partners to represent species groups that are often difficult to identify under at-sea field conditions.<br> 
 - `Scientific_name`: A scientific name is the standardized, universally accepted name used to identify and classify living organisms. It follows a system called binomial nomenclature.<br> 
-- `English_name`: Official common name of the species.<br>
+- `English_name`: Official common name of the species. When the species identification is between two different species, two common names are allowed separated by a diagonal, without spaces.<br>
 - `Groupping`: A custom classification system based on taxonomic and morphological similarities among species.<br>
 
 ### Example of use
@@ -295,7 +303,7 @@ seamonas::Code_Euring %>%
 
 If you use **seamonas** for your research, please consider citing this package. 
 
-Lerma M, Schwemmer, J (2025). Package seamonas. Access guidelines information for monitoring seabirds at sea. https://github.com/MiriamLL/seamonas
+Lerma M, Schwemmer, H (2025). Package seamonas. Access guidelines information for monitoring seabirds at sea. https://github.com/MiriamLL/seamonas
 
 Additional references:
 
