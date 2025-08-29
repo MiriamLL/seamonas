@@ -50,25 +50,6 @@ Load the package
 library(seamonas)
 ```
 
-## Euring
-
-`seamonas` contains:  
-- A list of **549** species names across morphological separated groups.
-
-```{r}
-head(Code_Euring)
-```
-
-```{r}
-Code_Euring<-Code_Euring
-```
-
-**Key fields**: 
-
-- `Code`: Numerical code based on [Euring](https://euring.org/data-and-codes/euring-codes). The species codes are primarily based on the EURING list, with additional 'uncertainty codes' commonly used by ESAS partners to represent species groups that are often difficult to identify under at-sea field conditions.<br> 
-- `Scientific_name`: A scientific name is the standardized, universally accepted name used to identify and classify living organisms. It follows a system called binomial nomenclature.<br> 
-- `English_name`: Official common name of the species.<br>
-- `Artificial_tax_class`: A custom classification system based on taxonomic and morphological similarities among species.<br>
 
 ## Explanations
 
@@ -261,6 +242,53 @@ seamonas::Observations_test %>%
   tally()%>%
   arrange(desc(n))%>%
   head(3)
+```
+
+## Euring
+
+`seamonas` contains:  
+- A list of **549** species names across morphological separated groups.
+
+```{r}
+head(Code_Euring)
+```
+
+```{r, echo=FALSE, eval=FALSE}
+Code_Euring<-seamonas::Code_Euring
+
+library(tidyverse)
+
+Code_Euring<-Code_Euring %>%
+  rename(Groupping=Artificial_tax_class)
+
+Code_Euring %>% filter(Groupping=='Gannets_Cormorants') %>% distinct()
+
+Code_Euring<-Code_Euring %>%
+  mutate(Groupping=case_when(English_name == 'Northern Gannet' ~ "Gannets",
+                             English_name == 'Great Cormorant' ~ "Cormorants",
+                             English_name == 'North Atlantic Cormorant' ~ "Cormorants",
+                             English_name == 'European Shag' ~ "Cormorants",
+                             English_name == 'Great Cormorant/European Shag' ~ "Cormorants",
+                             English_name == 'Pygmy Cormorant' ~ "Cormorants",
+                             English_name == 'unidentified cormorant' ~ "Cormorants",
+                             TRUE ~ Groupping
+                             ))
+save(Code_Euring, file = "Code_Euring.rda", version = 2)
+```
+
+**Key fields**: 
+
+- `Code`: Numerical code based on [Euring](https://euring.org/data-and-codes/euring-codes). The species codes are primarily based on the EURING list, with additional 'uncertainty codes' commonly used by ESAS partners to represent species groups that are often difficult to identify under at-sea field conditions.<br> 
+- `Scientific_name`: A scientific name is the standardized, universally accepted name used to identify and classify living organisms. It follows a system called binomial nomenclature.<br> 
+- `English_name`: Official common name of the species.<br>
+- `Groupping`: A custom classification system based on taxonomic and morphological similarities among species.<br>
+
+### Example of use
+
+```{r}
+seamonas::Code_Euring %>%
+  filter(Groupping=='Divers')%>%
+  distinct()
 ```
 
 ## Citation
