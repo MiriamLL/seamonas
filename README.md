@@ -396,19 +396,6 @@ seamonas::Observations_test %>%
 `seamonas` contains:  
 - A list of **549** species names across morphological separated groups.
 
-``` r
-head(Code_Euring)
-#> # A tibble: 6 × 4
-#>   Code  Scientific_name     English_name         Groupping
-#>   <chr> <chr>               <chr>                <chr>    
-#> 1 20    Gavia stellata      Red-throated Diver   Divers   
-#> 2 30    Gavia arctica       Black-throated Diver Divers   
-#> 3 40    Gavia immer         Great Northern Diver Divers   
-#> 4 50    Gavia adamsii       White-billed Diver   Divers   
-#> 5 59    Gavia spec.         unidentified diver   Divers   
-#> 6 60    Podilymbus podiceps Pied-billed Grebe    Grebes
-```
-
 **Key fields**:
 
 - `Code`: Numerical code based on
@@ -423,23 +410,22 @@ head(Code_Euring)
 - `English_name`: Official common name of the species. When the species
   identification is between two different species, two common names are
   allowed separated by a diagonal, without spaces.<br>
+- `Artificial_tax_class`: A custom classification system based on
+  taxonomic and morphological similarities among species. Serves the
+  repository QualityCheck.<br>
 - `Groupping`: A custom classification system based on taxonomic and
-  morphological similarities among species.<br>
+  morphological similarities among species. Subject to change based on
+  suggestions in Screening accuracy calculations.<br>
 
 ### Example of use
 
 ``` r
-seamonas::Code_Euring %>%
-  filter(Groupping=='Divers')%>%
+Code_Euring %>%
+  filter(Groupping=='Gannets_Swans')%>%
   distinct()
-#> # A tibble: 5 × 4
-#>   Code  Scientific_name English_name         Groupping
-#>   <chr> <chr>           <chr>                <chr>    
-#> 1 20    Gavia stellata  Red-throated Diver   Divers   
-#> 2 30    Gavia arctica   Black-throated Diver Divers   
-#> 3 40    Gavia immer     Great Northern Diver Divers   
-#> 4 50    Gavia adamsii   White-billed Diver   Divers   
-#> 5 59    Gavia spec.     unidentified diver   Divers
+#> # A tibble: 0 × 4
+#> # ℹ 4 variables: Code <chr>, Scientific_name <chr>, English_name <chr>,
+#> #   Groupping <chr>
 ```
 
 ## Citation

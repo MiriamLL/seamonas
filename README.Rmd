@@ -249,7 +249,7 @@ seamonas::Observations_test %>%
 `seamonas` contains:  
 - A list of **549** species names across morphological separated groups.
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, eval=FALSE}
 head(Code_Euring)
 ```
 
@@ -267,21 +267,25 @@ Code_Euring<-Code_Euring %>%
 Code_Euring %>% filter(Groupping=='Gannets_Cormorants') %>% distinct()
 ```
 
-```{r}
+```{r, echo=FALSE,eval=FALSE}
 unique(Code_Euring$Groupping)
 ```
 
 ```{r, echo=FALSE, eval=FALSE}
 Code_Euring<-Code_Euring %>%
   mutate(Groupping=case_when(English_name == 'Northern Gannet' ~ "Gannets_Swans",
-                             English_name == '|Mute Swan' ~ "Gannets_Swans",
+                             English_name == 'Mute Swan' ~ "Gannets_Swans",
+                             English_name == 'Bewick’s Swan' ~ "Gannets_Swans",
+                             English_name == 'Whooper Swan' ~ "Gannets_Swans",
+                             English_name == 'Bewick’s Swan/Whooper Swan' ~ "Gannets_Swans",
+                             English_name == 'unidentified swan' ~ "Gannets_Swans",
                              English_name == 'Great Cormorant' ~ "Cormorants",
                              English_name == 'North Atlantic Cormorant' ~ "Cormorants",
                              English_name == 'European Shag' ~ "Cormorants",
                              English_name == 'Great Cormorant/European Shag' ~ "Cormorants",
                              English_name == 'Pygmy Cormorant' ~ "Cormorants",
                              English_name == 'unidentified cormorant' ~ "Cormorants",
-                             Groupping=='Swan_Geese'~'Geese',
+                             #Groupping=='Swan_Geese'~'Geese',
                              TRUE ~ Groupping
                              ))
 
@@ -307,7 +311,7 @@ Code_Euring<-Code_Euring %>%
 ### Example of use
 
 ```{r}
-seamonas::Code_Euring %>%
+Code_Euring %>%
   filter(Groupping=='Gannets_Swans')%>%
   distinct()
 ```
